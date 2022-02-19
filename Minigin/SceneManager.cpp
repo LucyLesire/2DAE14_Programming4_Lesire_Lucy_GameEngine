@@ -2,11 +2,11 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-void dae::SceneManager::Update()
+void dae::SceneManager::Update(float dT)
 {
 	for(auto& scene : m_Scenes)
 	{
-		scene->Update();
+		scene->Update(dT);
 	}
 }
 
@@ -16,6 +16,10 @@ void dae::SceneManager::Render()
 	{
 		scene->Render();
 	}
+}
+
+void dae::SceneManager::FixedUpdate()
+{
 }
 
 dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
