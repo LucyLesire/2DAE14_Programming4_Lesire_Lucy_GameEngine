@@ -28,7 +28,7 @@ void dae::GameObject::SetPosition(float x, float y)
 }
 
 dae::GameObject::GameObject(const std::string& tag)
-	:m_Tag{tag}
+	:m_Tag{ tag }
 {
 }
 

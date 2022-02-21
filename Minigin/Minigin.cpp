@@ -11,6 +11,7 @@
 #include "Time.h"
 #include "ImageComponent.h"
 #include "TextComponent.h"
+#include "FPSComponent.h"
 
 using namespace std;
 
@@ -77,6 +78,7 @@ void dae::Minigin::LoadGame() const
 
 	go = std::make_shared<GameObject>("FPS");
 	go->AddComponent<TextComponent>(new TextComponent("FPS", font));
+	go->AddComponent<FPSComponent>(new FPSComponent(go));
 	go->SetPosition(10, 10);
 	scene.Add(go);
 }

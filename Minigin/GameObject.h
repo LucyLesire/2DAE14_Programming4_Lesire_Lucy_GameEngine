@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include <vector>
 #include "BaseComponent.h"
+
 namespace dae
 {
 	class GameObject final

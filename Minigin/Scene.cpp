@@ -18,14 +18,9 @@ void Scene::Add(const std::shared_ptr<GameObject>& object)
 
 void Scene::Update(float dT)
 {
-	const std::string fpsTag = "FPS";
 	for(auto& object : m_Objects)
 	{
 		object->Update(dT);
-		if (object->GetTag() == fpsTag)
-		{
-			object->GetComponent<TextComponent>()->SetText(std::to_string(int(std::roundf(1 / dT))));
-		}
 	}
 
 

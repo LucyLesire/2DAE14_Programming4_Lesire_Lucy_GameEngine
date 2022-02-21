@@ -7,7 +7,7 @@
 
 namespace dae
 {
-	class TextComponent final : public RenderComponent
+	class TextComponent : public RenderComponent
 	{
 	public:
 
@@ -22,14 +22,12 @@ namespace dae
 		TextComponent& operator=(const TextComponent& other) = delete;
 		TextComponent& operator=(TextComponent&& other) = delete;
 
-	private:
+	protected:
 		std::string m_Text;
 		std::shared_ptr<dae::Font> m_Font;
 		bool m_NeedsUpdate = true;
 
-		bool m_CanChange = true;
-		float m_WaitBetweenUpdates = 0.f;
-		const float m_MaxWait = 0.1f;
+
 	};
 }
 
