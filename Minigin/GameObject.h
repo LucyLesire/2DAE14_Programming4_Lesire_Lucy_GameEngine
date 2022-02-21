@@ -28,7 +28,7 @@ namespace dae
 
 		explicit GameObject(const std::string& tag);
 		GameObject() = default;
-		virtual ~GameObject() = default;
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;

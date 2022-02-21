@@ -32,3 +32,13 @@ dae::GameObject::GameObject(const std::string& tag)
 {
 }
 
+dae::GameObject::~GameObject()
+{
+	for (BaseComponent* c : m_pComponents)
+	{
+		delete c;
+		c = nullptr;
+	}
+	m_pComponents.clear();
+}
+
