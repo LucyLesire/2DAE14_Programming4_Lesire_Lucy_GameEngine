@@ -27,8 +27,8 @@ void dae::GameObject::SetPosition(float x, float y)
 	}
 }
 
-dae::GameObject::GameObject(Transform transForm)
-	:m_Transform{transForm}
+dae::GameObject::GameObject(const std::string& tag)
+	:m_Tag{tag}
 {
 }
 

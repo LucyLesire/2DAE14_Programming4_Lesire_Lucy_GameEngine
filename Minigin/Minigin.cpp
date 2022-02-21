@@ -74,6 +74,11 @@ void dae::Minigin::LoadGame() const
 	go->AddComponent<TextComponent>(new TextComponent("Programming 4 Assignment", font));
 	go->SetPosition(80, 20);
 	scene.Add(go);
+
+	go = std::make_shared<GameObject>("FPS");
+	go->AddComponent<TextComponent>(new TextComponent("FPS", font));
+	go->SetPosition(10, 10);
+	scene.Add(go);
 }
 
 void dae::Minigin::Cleanup()

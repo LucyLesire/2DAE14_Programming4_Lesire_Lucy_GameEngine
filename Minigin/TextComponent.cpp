@@ -2,7 +2,7 @@
 #include "TextComponent.h"
 #include <SDL_ttf.h>
 
-void TextComponent::Update(float)
+void dae::TextComponent::Update(float dT)
 {
 	if (m_NeedsUpdate)
 	{
@@ -20,22 +20,31 @@ void TextComponent::Update(float)
 		SDL_FreeSurface(surf);
 		m_Texture = std::make_shared<dae::Texture2D>(texture);
 		m_NeedsUpdate = false;
+		m_CanChange = false;
+	}
+
+	if (m_CanChange == false)
+	{
+		m_WaitBetweenUpdates += dT;
+		if (m_WaitBetweenUpdates > m_MaxWait)
+		{
+			m_WaitBetweenUpdates = 0.f;
+			m_CanChange = true;
+		}
 	}
 }
 
-TextComponent::TextComponent(const std::string& text, const std::shared_ptr<dae::Font>& font)
+dae::TextComponent::TextComponent(const std::string& text, const std::shared_ptr<dae::Font>& font)
 	:m_Text{text}
 	,m_Font{font}
 {
 }
 
-//void dae::TextObject::SetText(const std::string& text)
-//{
-//	m_Text = text;
-//	m_NeedsUpdate = true;
-//}
-//
-//void dae::TextObject::SetPosition(const float x, const float y)
-//{
-//	m_Transform.SetPosition(x, y, 0.0f);
-//}
+void dae::TextComponent::SetText(const std::string& text)
+{
+	if (m_CanChange)
+	{
+		m_Text = text;
+		m_NeedsUpdate = true;
+	}
+}

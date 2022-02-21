@@ -11,6 +11,7 @@ namespace dae
 		void Render();
 
 		void SetPosition(float x, float y);
+		std::string GetTag() const { return m_Tag; };
 
 		template <typename T> T* AddComponent(BaseComponent* pBaseComponent);
 		template <typename T> T* GetComponent() const;
@@ -24,7 +25,7 @@ namespace dae
 		void RemoveChild(int index) { m_pChildren.erase(m_pChildren.begin() + index); };
 		void AddChild(GameObject* go) { m_pChildren.push_back(go); };
 
-		explicit GameObject(Transform transForm);
+		explicit GameObject(const std::string& tag);
 		GameObject() = default;
 		virtual ~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
@@ -38,6 +39,8 @@ namespace dae
 
 		GameObject* m_pParent = nullptr;
 		std::vector<GameObject*> m_pChildren;
+
+		std::string m_Tag;
 	};
 
 	template<typename T>

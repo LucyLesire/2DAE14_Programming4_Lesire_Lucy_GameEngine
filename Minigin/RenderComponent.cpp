@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include <SDL_ttf.h>
 
-void RenderComponent::Render()
+void dae::RenderComponent::Render()
 {
 	if (m_Texture != nullptr)
 	{

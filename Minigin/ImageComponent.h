@@ -6,23 +6,27 @@
 #include "Font.h"
 #include "ResourceManager.h"
 
-class ImageComponent final : public RenderComponent
+namespace dae
 {
-public:
+	class ImageComponent final : public RenderComponent
+	{
+	public:
 
-	void Update(float deltaTime) override;
+		void Update(float deltaTime) override;
 
-	explicit ImageComponent(const std::string& fileName);
-	ImageComponent() = default;
-	virtual ~ImageComponent() = default;
-	ImageComponent(const ImageComponent& other) = delete;
-	ImageComponent(ImageComponent&& other) = delete;
-	ImageComponent& operator=(const ImageComponent& other) = delete;
-	ImageComponent& operator=(ImageComponent&& other) = delete;
+		explicit ImageComponent(const std::string& fileName);
+		ImageComponent() = default;
+		virtual ~ImageComponent() = default;
+		ImageComponent(const ImageComponent& other) = delete;
+		ImageComponent(ImageComponent&& other) = delete;
+		ImageComponent& operator=(const ImageComponent& other) = delete;
+		ImageComponent& operator=(ImageComponent&& other) = delete;
 
-private:
-	std::string m_Text;
-	std::shared_ptr<dae::Font> m_Font;
-	bool m_NeedsUpdate;
-};
+	private:
+		std::string m_Text;
+		std::shared_ptr<dae::Font> m_Font;
+		bool m_NeedsUpdate;
+	};
+}
+
 
