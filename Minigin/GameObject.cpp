@@ -21,7 +21,7 @@ void dae::GameObject::SetPosition(float x, float y)
 {
 	m_Transform.SetPosition(x, y, 0.f);
 
-	for (BaseComponent* c : m_pComponents)
+	for (std::shared_ptr<BaseComponent> c : m_pComponents)
 	{
 		c->SetPosition(m_Transform);
 	}
@@ -30,15 +30,5 @@ void dae::GameObject::SetPosition(float x, float y)
 dae::GameObject::GameObject(const std::string& tag)
 	:m_Tag{ tag }
 {
-}
-
-dae::GameObject::~GameObject()
-{
-	for (BaseComponent* c : m_pComponents)
-	{
-		delete c;
-		c = nullptr;
-	}
-	m_pComponents.clear();
 }
 

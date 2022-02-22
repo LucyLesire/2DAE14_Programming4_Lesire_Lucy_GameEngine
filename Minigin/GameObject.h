@@ -14,8 +14,8 @@ namespace dae
 		void SetPosition(float x, float y);
 		std::string GetTag() const { return m_Tag; };
 
-		template <typename T> T* AddComponent(BaseComponent* pBaseComponent);
-		template <typename T> T* GetComponent() const;
+		template <typename T> std::shared_ptr<T> AddComponent(std::shared_ptr<T> pBaseComponent);
+		template <typename T> std::shared_ptr<T> GetComponent() const;
 		template <typename T> void RemoveComponent();
 
 		void SetParent(GameObject* parent) { m_pParent = parent; };
@@ -28,7 +28,7 @@ namespace dae
 
 		explicit GameObject(const std::string& tag);
 		GameObject() = default;
-		~GameObject();
+		virtual ~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
@@ -36,7 +36,7 @@ namespace dae
 
 	private:
 		Transform m_Transform;
-		std::vector<BaseComponent*> m_pComponents;
+		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
 
 		GameObject* m_pParent = nullptr;
 		std::vector<GameObject*> m_pChildren;
@@ -45,21 +45,21 @@ namespace dae
 	};
 
 	template<typename T>
-	inline T* GameObject::AddComponent(BaseComponent* pBaseComponent)
+	inline std::shared_ptr<T> GameObject::AddComponent(std::shared_ptr<T> pBaseComponent)
 	{
 		pBaseComponent->SetPosition(m_Transform);
 		m_pComponents.push_back(pBaseComponent);
-		return dynamic_cast<T*>(pBaseComponent);
+		return std::shared_ptr<T>(pBaseComponent);
 	}
 
 	template<typename T>
-	inline T* GameObject::GetComponent() const
+	inline std::shared_ptr<T> GameObject::GetComponent() const
 	{
-		for (BaseComponent* c : m_pComponents)
+		for (std::shared_ptr<BaseComponent> c : m_pComponents)
 		{
-			if (dynamic_cast<T*>(c) != nullptr)
+			if (std::dynamic_pointer_cast<T>(c) != nullptr)
 			{
-				return dynamic_cast<T*>(c);
+				return std::dynamic_pointer_cast<T>(c);
 			}
 		}
 		return nullptr;
@@ -70,7 +70,7 @@ namespace dae
 	{
 		for (int i{}; i < m_pComponents.size(); i++)
 		{
-			if (dynamic_cast<T*>(m_pComponents[i]) != nullptr)
+			if (dynamic_cast<std::shared_ptr<T>>(m_pComponents[i]) != nullptr)
 			{
 				m_pComponents.erase(m_pComponents.begin() + i);
 			}

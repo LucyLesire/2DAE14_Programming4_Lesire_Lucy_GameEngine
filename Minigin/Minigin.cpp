@@ -60,25 +60,25 @@ void dae::Minigin::LoadGame() const
 {
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	auto go = std::make_shared<GameObject>();
-	go->AddComponent<ImageComponent>(new ImageComponent("background.jpg"));
+	auto go = std::make_shared<GameObject>("Background");
+	go->AddComponent<ImageComponent>(std::make_shared<ImageComponent>("background.jpg"));
 	
 	scene.Add(go);
 
-	go = std::make_shared<GameObject>();
-	go->AddComponent<ImageComponent>(new ImageComponent("logo.png"));
+	go = std::make_shared<GameObject>("Logo");
+	go->AddComponent<ImageComponent>(std::make_shared<ImageComponent>("logo.png"));
 	go->SetPosition(216, 180);
 	scene.Add(go);
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	go = std::make_shared<GameObject>();
-	go->AddComponent<TextComponent>(new TextComponent("Programming 4 Assignment", font));
+	go = std::make_shared<GameObject>("Title");
+	go->AddComponent<TextComponent>(std::make_shared<TextComponent>("Programming 4 Assignment", font));
 	go->SetPosition(80, 20);
 	scene.Add(go);
 
 	go = std::make_shared<GameObject>("FPS");
-	go->AddComponent<TextComponent>(new TextComponent("FPS", font));
-	go->AddComponent<FPSComponent>(new FPSComponent(go));
+	go->AddComponent<TextComponent>(std::make_shared<TextComponent>("FPS", font));
+	go->AddComponent<FPSComponent>(std::make_shared<FPSComponent>(go));
 	go->SetPosition(10, 10);
 	scene.Add(go);
 }

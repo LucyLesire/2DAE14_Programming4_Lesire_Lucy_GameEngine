@@ -22,8 +22,6 @@ void Scene::Update(float dT)
 	{
 		object->Update(dT);
 	}
-
-
 }
 
 void Scene::Render() const
