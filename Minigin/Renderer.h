@@ -27,7 +27,6 @@ namespace dae
 		void SetBackgroundColor(const SDL_Color& color) { m_clearColor = color; }
 
 	private:
-		std::shared_ptr<GraphObject> m_GraphObject;
 	};
 }
 

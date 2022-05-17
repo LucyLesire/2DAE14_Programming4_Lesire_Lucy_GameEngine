@@ -1,12 +1,16 @@
 #include "MiniginPCH.h"
 #include "InputManager.h"
 #include "backends/imgui_impl_sdl.h"
+#include "Command.h"
+#include "SceneManager.h"
 
-bool dae::InputManager::ProcessInput()
+dae::InputManager::InputManager()
 {
-	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	XInputGetState(0, &m_CurrentState);
+	m_pController = new XboxController();
+}
 
+bool dae::InputManager::ProcessInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands)
+{
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
@@ -18,27 +22,36 @@ bool dae::InputManager::ProcessInput()
 		if (e.type == SDL_MOUSEBUTTONDOWN) {
 			
 		}
+
 		
 		//Process ImGui Input Events
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
 
+	if (GetControllerInput(commands))
+	{
+
+	}
+
 	return true;
 }
 
-bool dae::InputManager::IsPressed(ControllerButton button) const
+void dae::InputManager::AddCommand(const std::map<ControllerButton, std::shared_ptr<Command>>& inputCommands, unsigned int id)
 {
-	switch (button)
-	{
-	case ControllerButton::ButtonA:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_A;
-	case ControllerButton::ButtonB:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_B;
-	case ControllerButton::ButtonX:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_X;
-	case ControllerButton::ButtonY:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
-	default: return false;
-	}
+	m_pController->AddCommand(inputCommands, id);
+}
+
+void dae::InputManager::RemoveCommand(const ControllerButton& button, unsigned int id)
+{
+	m_pController->RemoveCommand(button, id);
+}
+
+bool dae::InputManager::GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands)
+{
+	commands = m_pController->ProcessInput();
+	if (commands.size() != 0)
+		return true;
+
+	return false;
 }
 

@@ -36,7 +36,6 @@ void dae::Renderer::Init(SDL_Window * window)
 	ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_GetCurrentContext());
 	ImGui_ImplOpenGL2_Init();
 
-	m_GraphObject = std::make_shared<GraphObject>(m_Window);
 }
 
 void dae::Renderer::Render() const
@@ -47,7 +46,6 @@ void dae::Renderer::Render() const
 
 	SceneManager::GetInstance().Render();
 
-	m_GraphObject->Render();
 	SDL_RenderPresent(m_Renderer);
 }
 

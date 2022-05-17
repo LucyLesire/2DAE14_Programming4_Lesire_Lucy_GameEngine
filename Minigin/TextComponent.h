@@ -13,6 +13,7 @@ namespace dae
 
 		void Update(float deltaTime) override;
 		void SetText(const std::string& text);
+		std::string GetText() const { return m_Text; };
 
 		explicit TextComponent(const std::string& text, const std::shared_ptr<dae::Font>& font);
 		TextComponent() = default;

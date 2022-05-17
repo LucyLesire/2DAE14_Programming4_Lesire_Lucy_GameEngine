@@ -8,6 +8,8 @@
 #include "GameObject.h"
 #include "Scene.h"
 #include <chrono>
+
+#include "Command.h"
 #include "Time.h"
 #include "ImageComponent.h"
 #include "TextComponent.h"
@@ -81,6 +83,30 @@ void dae::Minigin::LoadGame() const
 	go->AddComponent<FPSComponent>(std::make_shared<FPSComponent>(go));
 	go->SetPosition(10, 10);
 	scene.Add(go);
+
+
+
+	auto goPlayer1 = std::make_shared<GameObject>("Peter Pepper");
+	goPlayer1->SetPosition(10, 160);
+	goPlayer1->AddComponent<PetterPepperComponent>(std::make_shared<PetterPepperComponent>(goPlayer1));
+	scene.Add(goPlayer1);
+
+	auto goPlayer2 = std::make_shared<GameObject>("Peter Pepper 2");
+	goPlayer2->SetPosition(10, 260);
+	goPlayer2->AddComponent<PetterPepperComponent>(std::make_shared<PetterPepperComponent>(goPlayer2));
+	scene.Add(goPlayer2);
+
+	std::map<ControllerButton, std::shared_ptr<Command>> inputMap{};
+	inputMap[ControllerButton::ButtonA] = std::make_shared<DieCommand>(goPlayer1.get());
+	inputMap[ControllerButton::ButtonB] = std::make_shared<PointCommand>(goPlayer1.get());
+
+	inputMap[ControllerButton::ButtonX] = std::make_shared<DieCommand>(goPlayer2.get());
+	inputMap[ControllerButton::ButtonY] = std::make_shared<PointCommand>(goPlayer2.get());
+
+	InputManager::GetInstance().AddCommand(inputMap, 0);
+
+	std::cout << "Player 1 input: A for Dying, B for Points (50)\n";
+	std::cout << "Player 2 input: X for Dying, Y for Points (50)\n";
 }
 
 void dae::Minigin::Cleanup()
@@ -112,12 +138,18 @@ void dae::Minigin::Run()
 		const float fixedTimeStep = 0.02f;
 		while (doContinue)
 		{
+			std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> commands{};
 			auto currentTime = std::chrono::high_resolution_clock::now();
 			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 
 			lastTime = currentTime;
 			lag += deltaTime;
-			doContinue = input.ProcessInput();
+			doContinue = input.ProcessInput(commands);
+			if(commands.size() != 0)
+			{
+				for (const auto& c : commands)
+					c.second->Execute();
+			}
 			sceneManager.Update(deltaTime);
 
 			while (lag >= fixedTimeStep)

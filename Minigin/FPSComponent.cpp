@@ -16,15 +16,16 @@ void dae::FPSComponent::Update(float dT)
 	}
 	else
 	{
-		if (m_Owner->GetComponent<TextComponent>())
+		if (GetOwner().lock()->GetComponent<TextComponent>())
 		{
-			m_Owner->GetComponent<TextComponent>()->SetText(std::to_string(int(std::roundf(1 / dT))));
+			GetOwner().lock()->GetComponent<TextComponent>()->SetText(std::to_string(int(std::roundf(1 / dT))));
 			m_CanChange = false;
 		}
 	}
 }
 
-dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> owner)
+dae::FPSComponent::FPSComponent(std::weak_ptr<GameObject> owner)
+	:BaseComponent(owner)
 {
-	m_Owner = owner;
+	
 }

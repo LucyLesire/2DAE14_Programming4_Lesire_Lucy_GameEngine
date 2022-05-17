@@ -12,42 +12,53 @@ namespace dae
 		void Render();
 
 		void SetPosition(float x, float y);
+		Transform GetWorldPosition();
 		std::string GetTag() const { return m_Tag; };
 
 		template <typename T> std::shared_ptr<T> AddComponent(std::shared_ptr<T> pBaseComponent);
 		template <typename T> std::shared_ptr<T> GetComponent() const;
 		template <typename T> void RemoveComponent();
 
-		void SetParent(GameObject* parent) { m_pParent = parent; };
+		void SetParent(GameObject* parent, bool keepWorldPos);
 		GameObject* GetParent() const { return m_pParent; };
 
 		size_t GetChildCount() const { return m_pChildren.size(); };
 		GameObject* GetChildAt(int index) const { return m_pChildren[index]; };
-		void RemoveChild(int index) { m_pChildren.erase(m_pChildren.begin() + index); };
-		void AddChild(GameObject* go) { m_pChildren.push_back(go); };
+		void RemoveChildAtIndex(int index) { m_pChildren.erase(m_pChildren.begin() + index); };
 
 		explicit GameObject(const std::string& tag);
 		GameObject() = default;
-		virtual ~GameObject() = default;
+		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		Transform m_Transform;
+		Transform m_LocalPos;
+		Transform m_WorldPos;
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
 
 		GameObject* m_pParent = nullptr;
 		std::vector<GameObject*> m_pChildren;
 
 		std::string m_Tag;
+
+		bool m_PositionDirty = false;
+
+	protected:
+		void AddChild(GameObject* go) { m_pChildren.push_back(go); };
+		void RemoveChild(GameObject* go);
+
+		void SetLocalPosition(Transform trans);
+		void SetWorldPosition();
+		Transform GetLocalPosition() const { return m_LocalPos; };
 	};
 
 	template<typename T>
 	inline std::shared_ptr<T> GameObject::AddComponent(std::shared_ptr<T> pBaseComponent)
 	{
-		pBaseComponent->SetPosition(m_Transform);
+		pBaseComponent->SetTransform(m_LocalPos);
 		m_pComponents.push_back(pBaseComponent);
 		return std::shared_ptr<T>(pBaseComponent);
 	}

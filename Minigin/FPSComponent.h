@@ -8,7 +8,7 @@ namespace dae
 	public:
 		void Update(float dT) override;
 
-		explicit FPSComponent(std::shared_ptr<GameObject> owner);
+		explicit FPSComponent(std::weak_ptr<GameObject> pOwner);
 		FPSComponent() = default;
 		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& other) = delete;

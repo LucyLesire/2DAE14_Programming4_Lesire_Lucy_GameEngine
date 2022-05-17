@@ -31,6 +31,15 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{1d99d7df-74a3-4907-977d-f7b66968d007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{2c4f8024-a687-426b-b7a6-1595d003caef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainEngine\Input">
+      <UniqueIdentifier>{5f2d2ad8-beb0-438e-bb6c-18710ee9799f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Subjects">
+      <UniqueIdentifier>{62ebc879-0160-4e3e-b68e-7c2c575145b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -78,9 +87,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\MainEngine</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
     <ClInclude Include="FPSComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -113,6 +119,24 @@
     </ClInclude>
     <ClInclude Include="GraphObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="XboxController.h">
+      <Filter>Source Files\MainEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Source Files\MainEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="PetterPepperComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\Subjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Subjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +182,6 @@
     <ClCompile Include="Texture2D.cpp">
       <Filter>Source Files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Header Files\Components</Filter>
     </ClCompile>
@@ -190,6 +211,24 @@
     </ClCompile>
     <ClCompile Include="GraphObject.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Header Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="XboxController.cpp">
+      <Filter>Source Files\MainEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\MainEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="PetterPepperComponent.cpp">
+      <Filter>Header Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Header Files\Subjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Header Files\Subjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

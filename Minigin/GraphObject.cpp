@@ -22,14 +22,14 @@ struct Transform
 class GameObject3D
 {
 public:
-	Transform transform;
+	Transform transform{};
 	int ID = 5;
 };
 
 class GameObjectAlt3D
 {
 public:
-	Transform* transform;
+	Transform* transform{};
 	int ID = 5;
 };
 
