@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 #include "Texture2D.h"
+#include <SDL_rect.h>
 
 namespace dae
 {
@@ -10,7 +11,7 @@ namespace dae
 	public:
 
 		virtual void Update(float deltaTime) = 0;
-
+		virtual void LateUpdate(float) override = 0;
 		void Render();
 
 		RenderComponent() = default;
@@ -20,9 +21,20 @@ namespace dae
 		RenderComponent& operator=(const RenderComponent& other) = delete;
 		RenderComponent& operator=(RenderComponent&& other) = delete;
 
+		void SetSize(Transform2D size) { m_Size = size; }
+		Transform2D GetSize() const { return m_Size; }
+
+		void SetSrcRect(const SDL_Rect& srcRect) { m_SrcRect = srcRect; }
+
+		void SetFlipped(bool enable) { m_Flipped = enable; }
 	protected:
 		std::shared_ptr<dae::Texture2D> m_Texture;
 		bool m_NeedsUpdate = false;
+		float m_zPos{};
+	private:
+		bool m_Flipped{};
+		Transform2D m_Size{};
+		SDL_Rect m_SrcRect{};
 	};
 }
 

@@ -1,15 +1,20 @@
 #pragma once
-#include "Transform.h"
 #include <vector>
 #include "BaseComponent.h"
-
+#include "Transform.h"
+#include <vector>
+#include <memory>
+#include <iostream>
 namespace dae
 {
 	class GameObject final
 	{
 	public:
+		void Initialize();
 		void Update(float deltaTime);
 		void Render();
+		void FixedUpdate(float fixedDT);
+		void LateUpdate(float deltaTime);
 
 		void SetPosition(float x, float y);
 		Transform GetWorldPosition();
@@ -26,7 +31,12 @@ namespace dae
 		GameObject* GetChildAt(int index) const { return m_pChildren[index]; };
 		void RemoveChildAtIndex(int index) { m_pChildren.erase(m_pChildren.begin() + index); };
 
-		explicit GameObject(const std::string& tag);
+		int GetRenderOrder() const { return m_RenderOrder; }
+
+		void Destroy() { m_Destroy = true; }
+		bool GetDestroyed() const { return m_Destroy; }
+
+		explicit GameObject(const std::string& tag, int renderOrder = 0);
 		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -46,6 +56,10 @@ namespace dae
 
 		bool m_PositionDirty = false;
 
+		int m_RenderOrder{};
+
+		bool m_Destroy{};
+
 	protected:
 		void AddChild(GameObject* go) { m_pChildren.push_back(go); };
 		void RemoveChild(GameObject* go);
@@ -58,7 +72,7 @@ namespace dae
 	template<typename T>
 	inline std::shared_ptr<T> GameObject::AddComponent(std::shared_ptr<T> pBaseComponent)
 	{
-		pBaseComponent->SetTransform(m_LocalPos);
+		pBaseComponent->SetWorldTransform(m_LocalPos);
 		m_pComponents.push_back(pBaseComponent);
 		return std::shared_ptr<T>(pBaseComponent);
 	}

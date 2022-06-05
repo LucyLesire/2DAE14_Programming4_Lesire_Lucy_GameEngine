@@ -1,6 +1,7 @@
 #include "MiniginPCH.h"
 #include "TextComponent.h"
 #include <SDL_ttf.h>
+#include "Renderer.h"
 
 void dae::TextComponent::Update(float)
 {

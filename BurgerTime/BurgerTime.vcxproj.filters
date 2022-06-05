@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{7dd06843-7a6c-4278-9aff-ebd1722724b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{9db4f0c3-ec58-455d-88a0-58417841d3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Observers">
+      <UniqueIdentifier>{91bc370a-0085-4b20-8239-0e0b9262deee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{9a25377e-8f47-48a4-a340-b934af3178ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{c3de832d-1021-46b2-b3e9-7fc26665d3a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PetterPepperComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommands.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="PetterPepperCommands.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="PetterPepperDisplays.cpp">
+      <Filter>Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerTime.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerTimeGame.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerTimeMainScene.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerTimePCH.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PeterPepperObserver.cpp">
+      <Filter>Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderPrefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorPrefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="FoodComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PointObserver.cpp">
+      <Filter>Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PetterPepperComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommands.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PetterPepperCommands.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PetterPepperDisplays.h">
+      <Filter>Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimeGame.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimeMainScene.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimePCH.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="PeterPepperObserver.h">
+      <Filter>Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="LadderPrefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="LadderComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorPrefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PointObserver.h">
+      <Filter>Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

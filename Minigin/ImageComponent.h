@@ -1,10 +1,6 @@
 #pragma once
 #include "RenderComponent.h"
-#include "Texture2D.h"
-#include "Renderer.h"
-#include "Transform.h"
 #include "Font.h"
-#include "ResourceManager.h"
 
 namespace dae
 {
@@ -13,8 +9,11 @@ namespace dae
 	public:
 
 		void Update(float deltaTime) override;
+		void FixedUpdate(float fDT) override;
+		void LateUpdate(float) override {};
+		void Initialize() override;
 
-		explicit ImageComponent(const std::string& fileName);
+		explicit ImageComponent(const std::string& fileName, float zPos = 0);
 		ImageComponent() = default;
 		virtual ~ImageComponent() = default;
 		ImageComponent(const ImageComponent& other) = delete;
@@ -22,10 +21,11 @@ namespace dae
 		ImageComponent& operator=(const ImageComponent& other) = delete;
 		ImageComponent& operator=(ImageComponent&& other) = delete;
 
+		void SetSheetSize(Transform2D size) { m_SheetSize = size; }
+		Transform2D GetSheetSize() const { return m_SheetSize; }
+
 	private:
-		std::string m_Text;
-		std::shared_ptr<dae::Font> m_Font;
-		bool m_NeedsUpdate;
+		Transform2D m_SheetSize{};
 	};
 }
 

@@ -3,88 +3,42 @@
 
 #include "BaseComponent.h"
 #include "GameObject.h"
-#include "PetterPepperComponent.h"
+#include "ServiceLocator.h"
 
 class Command
 {
 protected:
-	dae::GameObject* GetObject() const { return m_GameObject; };
+	dae::GameObject* GetObject() const { return m_pGameObject; };
 public:
 	explicit Command(dae::GameObject* go)
-		:m_GameObject(go)
+		:m_pGameObject(go)
 	{
 
 	};
-	virtual ~Command()
-	{
-		delete m_GameObject;
-		m_GameObject = nullptr;
-	};
+	virtual ~Command() = default;
 	virtual void Execute() = 0;
+	virtual void Release() = 0;
 
 private:
-	dae::GameObject* m_GameObject = nullptr;
+	dae::GameObject* m_pGameObject = nullptr;
 };
 
-class FireCommand : public Command
-{
-public:
-	void Execute() override { Fire(); };
-private:
-	void Fire() { std::cout << "Fire\n"; };
-};
-
-class JumpCommand : public Command
-{
-public:
-	void Execute() override { Jump(); };
-private:
-	void Jump() { std::cout << "Jump\n"; };
-};
-
-class DuckCommand : public Command
-{
-public:
-	void Execute() override { Duck(); };
-private:
-	void Duck() { std::cout << "Duck\n"; };
-};
-
-class FartCommand : public Command
-{
-public:
-	void Execute() override { Fart(); };
-private:
-	void Fart() { std::cout << "Fart\n"; };
-};
-
-class DieCommand : public Command
+class AudioCommand : public Command
 {
 public:
 	void Execute() override
 	{
-		GetObject()->GetComponent<dae::PetterPepperComponent>()->Die();
-	}
+		dae::ServiceLocator::GetSoundSystem().Play(0, 100);
+	};
 
-	DieCommand(dae::GameObject* go)
-		:Command(go)
+	void Release() override {};
+
+	AudioCommand()
+		:Command(nullptr)
 	{
 
 	};
 };
 
-class PointCommand : public Command
-{
-public:
-	void Execute() override
-	{
-		GetObject()->GetComponent<dae::PetterPepperComponent>()->AddPoints();
-	}
 
-	PointCommand(dae::GameObject* go)
-		:Command(go)
-	{
-
-	};
-};
 

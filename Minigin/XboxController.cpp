@@ -131,6 +131,7 @@ dae::XboxController::XboxController()
 dae::XboxController::~XboxController()
 {
 	delete pImpl;
+	pImpl = nullptr;
 }
 
 

@@ -29,14 +29,25 @@ namespace dae
 	{
 	public:
 		InputManager();
-		bool ProcessInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands);
+		~InputManager();
+		InputManager(const InputManager& other) = delete;
+		InputManager(InputManager&& other) noexcept = delete;
+		InputManager& operator=(const InputManager& other) = delete;
+		InputManager& operator=(InputManager&& other) noexcept = delete;
+
+		bool ProcessInput();
 		bool IsPressed(ControllerButton button) const;
 
 		void AddCommand(const std::map<ControllerButton, std::shared_ptr<Command>>& inputCommands, unsigned int id);
+		void AddCommand(const std::map<SDL_Scancode, std::shared_ptr<Command>>& inputCommands, unsigned int id);
 		void RemoveCommand(const ControllerButton& button, unsigned int id);
 	private:
 		XboxController* m_pController;
 		bool GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands);
+
+		using KeyBoardKey = std::pair<unsigned, SDL_Scancode>;
+		using KeyBoardCommandsMap = std::map<KeyBoardKey, std::shared_ptr<Command>>;
+		KeyBoardCommandsMap m_KeyboardCommands{};
 	};
 
 }

@@ -5,7 +5,6 @@
 namespace dae
 {
 	class GameObject;
-
 	class BaseComponent
 	{
 	public:
@@ -17,23 +16,27 @@ namespace dae
 		BaseComponent& operator=(BaseComponent&& other) = delete;
 
 		virtual void Update(float dT) = 0;
+		virtual void FixedUpdate(float fDT) = 0;
+		virtual void Initialize() = 0;
+		virtual void LateUpdate(float dT) = 0;
 
-		void SetTransform(dae::Transform transForm) { m_Transform = transForm; };
-		Transform GetTransform() const { return m_Transform; };
+		void SetWorldTransform(dae::Transform transForm) { m_WorldTransform = transForm + m_LocalTransform; };
+		void SetLocalTransform(dae::Transform transForm) { m_LocalTransform = transForm; };
+		Transform GetTransform() const { return m_WorldTransform; };
+		Transform GetLocalTransform() const { return m_LocalTransform; };
 
-		Subject* GetSubject() const { return m_Subject.get(); };
+		const std::unique_ptr<Subject>& GetSubject() const { return m_pSubject; };
+
+		GameObject* GetOwner() const { return m_pOwner; }
 
 	private:
-		dae::Transform m_Transform;
-		std::weak_ptr<GameObject> m_pOwner;
-		std::unique_ptr<Subject> m_Subject;
+		Transform m_WorldTransform;
+		Transform m_LocalTransform;
+		GameObject* m_pOwner;
+		std::unique_ptr<Subject> m_pSubject;
 
 	protected:
-		explicit BaseComponent(std::weak_ptr<GameObject> pOwner) : m_pOwner(pOwner)
-		{
-			m_Subject = std::make_unique<Subject>();
-		}
-		std::weak_ptr<GameObject> GetOwner() const { return m_pOwner; }
+		explicit BaseComponent(GameObject* pOwner);
 	};
 }
 

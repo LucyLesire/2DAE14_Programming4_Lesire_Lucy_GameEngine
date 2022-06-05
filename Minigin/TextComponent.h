@@ -1,8 +1,5 @@
 #pragma once
 #include "RenderComponent.h"
-#include "Texture2D.h"
-#include "Renderer.h"
-#include "Transform.h"
 #include "Font.h"
 
 namespace dae
@@ -12,6 +9,10 @@ namespace dae
 	public:
 
 		void Update(float deltaTime) override;
+		void LateUpdate(float) override {};
+		void FixedUpdate(float) override{};
+		void Initialize() override{};
+
 		void SetText(const std::string& text);
 		std::string GetText() const { return m_Text; };
 

@@ -1,5 +1,8 @@
 #pragma once
 #include "Singleton.h"
+#include <vector>
+#include <memory>
+#include <iostream>
 
 namespace dae
 {
@@ -7,13 +10,15 @@ namespace dae
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		Scene& CreateScene(const std::string& name);
+		Scene& CreateScene(const std::shared_ptr<Scene>& scene);
 		std::shared_ptr<Scene> GetSceneAtIndex(int i) const { return m_Scenes[i]; };
 		size_t GetAmountOfScenes() const { return m_Scenes.size(); };
 
+		void Initialize();
 		void Update(float dT);
 		void Render();
-		void FixedUpdate();
+		void FixedUpdate(float fDT);
+		void LateUpdate(float dT);
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;

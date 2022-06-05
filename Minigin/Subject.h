@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include <memory>
+#include <iostream>
+
 #define MAX_OBSERVERS = 10;
 
 namespace dae
@@ -16,7 +20,7 @@ namespace dae
 		void RemoveObserver(std::shared_ptr<Observer> pObserver);
 
 		void Notify(GameObject* pGo, Event event);
-		~Subject();
+		~Subject() = default;
 
 	private:
 		std::vector<std::shared_ptr<Observer>> m_pObservers{};

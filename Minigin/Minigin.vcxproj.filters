@@ -1,94 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{d1fec503-e4cc-4caa-a57b-25d113977d73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Helpers">
-      <UniqueIdentifier>{f8b3350b-2a52-465c-8ae1-f3e5ae920f89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\MainEngine">
-      <UniqueIdentifier>{d41f02bd-8cea-4a3e-be54-6acbc321aa1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MainEngine">
-      <UniqueIdentifier>{d3f8114d-ebeb-4258-a387-ecce69f90189}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Helpers">
-      <UniqueIdentifier>{7c36299e-ea01-4fdd-98e4-c3ef78d9aa7c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Imgui">
       <UniqueIdentifier>{1d99d7df-74a3-4907-977d-f7b66968d007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Commands">
+    <Filter Include="Commands">
       <UniqueIdentifier>{2c4f8024-a687-426b-b7a6-1595d003caef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MainEngine\Input">
+    <Filter Include="Components">
+      <UniqueIdentifier>{d1fec503-e4cc-4caa-a57b-25d113977d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{f8b3350b-2a52-465c-8ae1-f3e5ae920f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{02d16368-2dd7-47db-a557-fad967cb16c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Subjects">
+      <UniqueIdentifier>{62ebc879-0160-4e3e-b68e-7c2c575145b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
       <UniqueIdentifier>{5f2d2ad8-beb0-438e-bb6c-18710ee9799f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Subjects">
-      <UniqueIdentifier>{62ebc879-0160-4e3e-b68e-7c2c575145b0}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2da56ff7-28ba-4bf8-81c7-aef2e7ac4189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{c0bd9a55-5cd8-4426-994c-98eb6984a354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{d41f02bd-8cea-4a3e-be54-6acbc321aa1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BaseComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ImageComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Texture2D.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Minigin.h">
-      <Filter>Header Files\MainEngine</Filter>
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="MiniginPCH.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\MainEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui-1.87\imconfig.h">
       <Filter>Imgui</Filter>
@@ -117,73 +94,59 @@
     <ClInclude Include="..\3rdParty\imgui-1.87\imgui_plot.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="GraphObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Header Files\Commands</Filter>
+      <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="XboxController.h">
-      <Filter>Source Files\MainEngine\Input</Filter>
+      <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Source Files\MainEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="PetterPepperComponent.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
-      <Filter>Header Files\Subjects</Filter>
+      <Filter>Subjects</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Header Files\Subjects</Filter>
+      <Filter>Subjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphObject.h" />
+    <ClInclude Include="GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGame.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ImageComponent.cpp">
-      <Filter>Header Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Minigin.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="MiniginPCH.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\MainEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Source Files\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.87\imgui.cpp">
       <Filter>Imgui</Filter>
@@ -209,26 +172,66 @@
     <ClCompile Include="..\3rdParty\imgui-1.87\imgui_plot.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="GraphObject.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Header Files\Commands</Filter>
+      <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="XboxController.cpp">
-      <Filter>Source Files\MainEngine\Input</Filter>
+      <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\MainEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="PetterPepperComponent.cpp">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Subject.cpp">
-      <Filter>Header Files\Subjects</Filter>
+      <Filter>Subjects</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>Header Files\Subjects</Filter>
+      <Filter>Subjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphObject.cpp" />
+    <ClCompile Include="Font.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigin.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniginPCH.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGame.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

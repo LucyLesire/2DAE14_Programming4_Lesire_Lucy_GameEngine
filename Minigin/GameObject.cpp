@@ -1,8 +1,14 @@
 #include "MiniginPCH.h"
 #include "GameObject.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
 #include "RenderComponent.h"
+
+void dae::GameObject::Initialize()
+{
+	for (auto c : m_pComponents)
+	{
+		c->Initialize();
+	}
+}
 
 void dae::GameObject::Update(float deltaTime)
 {
@@ -18,13 +24,37 @@ void dae::GameObject::Render()
 		GetComponent<RenderComponent>()->Render();
 }
 
+void dae::GameObject::FixedUpdate(float fixedDT)
+{
+	for (auto c : m_pComponents)
+	{
+		c->FixedUpdate(fixedDT);
+	}
+}
+
+void dae::GameObject::LateUpdate(float deltaTime)
+{
+	for (auto c : m_pComponents)
+	{
+		c->LateUpdate(deltaTime);
+	}
+}
+
+
 void dae::GameObject::SetPosition(float x, float y)
 {
-	m_WorldPos.SetPosition(x, y, 0.f);
+	Transform newPos{x, y, 0};
+	SetLocalPosition(newPos);
+	SetWorldPosition();
+
+	for(GameObject* c : m_pChildren)
+	{
+		c->SetPosition(c->GetLocalPosition().GetPosition().x, c->GetLocalPosition().GetPosition().y);
+	}
 
 	for (std::shared_ptr<BaseComponent> c : m_pComponents)
 	{
-		c->SetTransform(m_WorldPos);
+		c->SetWorldTransform(m_WorldPos);
 	}
 }
 
@@ -65,8 +95,10 @@ void dae::GameObject::RemoveChild(GameObject* go)
 	}
 }
 
-dae::GameObject::GameObject(const std::string& tag)
+dae::GameObject::GameObject(const std::string& tag, int renderOrder)
 	:m_Tag{ tag }
+	,m_RenderOrder(renderOrder)
+	,m_PositionDirty(false)
 {
 }
 
