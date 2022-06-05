@@ -5,6 +5,7 @@
 
 namespace  dae
 {
+	class SDLSoundSystem;
 	class Prefab;
 	class LadderPrefab;
 
@@ -24,6 +25,8 @@ namespace  dae
 		void ReadJson(const std::wstring& fileLoc);
 
 		std::vector<std::shared_ptr<Prefab>> m_pPrefabs{};
+
+		std::shared_ptr<SDLSoundSystem> m_pSoundSystem{};
 	};
 }
 

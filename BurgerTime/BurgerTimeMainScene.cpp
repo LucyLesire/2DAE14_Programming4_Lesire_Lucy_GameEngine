@@ -47,11 +47,11 @@ void dae::BurgerTimeMainScene::Initialize()
 	goLevel->GetComponent<ImageComponent>()->SetSize({ 748.8f, 720 });
 	Add(goLevel);
 
+	//Player
 	std::shared_ptr<dae::GameObject> goPlayer1 = std::make_shared<dae::GameObject>("Peter Pepper", 1);
 	goPlayer1->SetPosition(0, 15);
 	goPlayer1->AddComponent<dae::PetterPepperComponent>(std::make_shared<dae::PetterPepperComponent>(goPlayer1.get()));
 	goPlayer1->AddComponent(std::make_shared<dae::ImageComponent>("PetterPepperSprites.png"));
-	//goPlayer1->AddComponent(std::make_shared<dae::ImageComponent>("Red.png"));
 	goPlayer1->AddComponent(std::make_shared<dae::MovementComponent>(goPlayer1.get(), 100.f));
 	goPlayer1->GetComponent<ImageComponent>()->SetSize({ 50.f, 50.f });
 	goPlayer1->GetComponent<ImageComponent>()->SetSheetSize({ 144.f, 32.f });
@@ -59,12 +59,17 @@ void dae::BurgerTimeMainScene::Initialize()
 	goPlayer1->GetComponent<CollisionComponent>()->SetLocalTransform(Transform{ 25.f, 20.f, 0.f });
 	goPlayer1->GetComponent<ImageComponent>()->SetLocalTransform(Transform{ 0.f, -50.f/4.f, 0.f });
 
-	//std::shared_ptr<dae::GameObject> goPlayer1ColObject = std::make_shared<dae::GameObject>("PetterPepperCol");
-	//goPlayer1ColObject->AddComponent(std::make_shared<ImageComponent>("Red.png"));
+	auto goPepper = std::make_shared<dae::GameObject>("Pepper", 2);
+	auto pPepperImage = goPepper->AddComponent(std::make_shared<ImageComponent>("Pepper.png"));
+	pPepperImage->SetSheetSize({ 32.f, 8.f });
+	pPepperImage->SetSize({ 50.f, 50.f });
+	pPepperImage->SetSrcRect(SDL_Rect{ 0, 0, 32 / 4, 8 });
+	pPepperImage->SetActive(false);
+	pPepperImage->SetLocalTransform({ 0.f, -12.5f, 0.f });
 
-	//goPlayer1ColObject->SetParent(goPlayer1.get(), false);
-	//goPlayer1ColObject->SetPosition(25.f, -20.f);
-	//Add(goPlayer1ColObject);
+	Add(goPepper);
+	goPepper->SetParent(goPlayer1.get(), false);
+
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
@@ -86,7 +91,7 @@ void dae::BurgerTimeMainScene::Initialize()
 	kInputMap[SDL_SCANCODE_D] = std::make_shared<MoveRightCommand>(goPlayer1.get());
 	kInputMap[SDL_SCANCODE_W] = std::make_shared<MoveUpLadderCommand>(goPlayer1.get());
 	kInputMap[SDL_SCANCODE_S] = std::make_shared<MoveDownLadderCommand>(goPlayer1.get());
-	kInputMap[SDL_SCANCODE_X] = std::make_shared<DieCommand>(goPlayer1.get());
+	kInputMap[SDL_SCANCODE_F] = std::make_shared<PepperCommand>(goPlayer1.get());
 	InputManager::GetInstance().AddCommand(kInputMap, 0);
 
 
@@ -104,6 +109,12 @@ void dae::BurgerTimeMainScene::Initialize()
 	goFPSCounter->AddComponent(std::make_shared<FPSComponent>(goFPSCounter.get()));
 	goFPSCounter->SetPosition(0, 0);
 	Add(goFPSCounter);
+
+	std::map<unsigned short, std::string> soundClips{};
+	soundClips[0] = "../Data/Sounds/Music.wav";
+	m_pSoundSystem = std::make_shared<SDLSoundSystem>(soundClips);
+	ServiceLocator::RegisterSoundSystem(m_pSoundSystem.get());
+	ServiceLocator::GetSoundSystem().Play(0, 80);
 }
 
 void dae::BurgerTimeMainScene::ReadJson(const std::wstring& fileLoc)

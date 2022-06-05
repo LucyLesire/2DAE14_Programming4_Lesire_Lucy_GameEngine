@@ -104,14 +104,17 @@ dae::GameObject::GameObject(const std::string& tag, int renderOrder)
 
 dae::GameObject::~GameObject()
 {
-	delete m_pParent;
-	m_pParent = nullptr;
+	//if(m_pParent)
+	//{
+	//	delete m_pParent;
+	//	m_pParent = nullptr;
+	//}
 
-	for(int i{}; i < m_pChildren.size(); ++i)
-	{
-		delete m_pChildren[i];
-		m_pChildren[i] = nullptr;
-	}
+	//for(int i{}; i < m_pChildren.size(); ++i)
+	//{
+	//	delete m_pChildren[i];
+	//	m_pChildren[i] = nullptr;
+	//}
 
 	m_pChildren.clear();
 }

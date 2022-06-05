@@ -36,6 +36,7 @@ struct Tile
 	int m_Index;
 	bool m_Pushed{};
 	bool m_Falling{};
+	bool m_Peppered{};
 
 	Tile(glm::vec4 boundingBox, bool isActive, int index)
 	{
@@ -46,6 +47,7 @@ struct Tile
 		m_ExtraType = ExtraType::Empty;
 		m_Index = index;
 		m_Falling = false;
+		m_Peppered = false;
 	}
 
 	

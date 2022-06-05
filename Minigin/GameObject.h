@@ -28,8 +28,8 @@ namespace dae
 		GameObject* GetParent() const { return m_pParent; };
 
 		size_t GetChildCount() const { return m_pChildren.size(); };
-		GameObject* GetChildAt(int index) const { return m_pChildren[index]; };
-		void RemoveChildAtIndex(int index) { m_pChildren.erase(m_pChildren.begin() + index); };
+		GameObject* GetChildAt(size_t index) const { return m_pChildren[index]; };
+		void RemoveChildAtIndex(size_t index) { m_pChildren.erase(m_pChildren.begin() + index); };
 
 		int GetRenderOrder() const { return m_RenderOrder; }
 

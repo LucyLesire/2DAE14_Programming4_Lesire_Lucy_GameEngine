@@ -22,6 +22,7 @@
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="BurgerTimeGame.cpp" />
     <ClCompile Include="BurgerTimeMainScene.cpp" />
+    <ClCompile Include="BurgerTimeMenu.cpp" />
     <ClCompile Include="BurgerTimePCH.cpp" />
     <ClCompile Include="FloorComponent.cpp" />
     <ClCompile Include="FloorPrefab.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="BurgerTimeGame.h" />
     <ClInclude Include="BurgerTimeMainScene.h" />
+    <ClInclude Include="BurgerTimeMenu.h" />
     <ClInclude Include="BurgerTimePCH.h" />
     <ClInclude Include="FloorComponent.h" />
     <ClInclude Include="FloorPrefab.h" />

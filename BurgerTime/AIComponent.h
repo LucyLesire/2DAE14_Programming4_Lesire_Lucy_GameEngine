@@ -15,13 +15,15 @@ namespace dae
 		AIComponent& operator=(const AIComponent& other) = delete;
 		AIComponent& operator=(AIComponent&& other) noexcept = delete;
 
-		void FixedUpdate(float) override{};
+		void FixedUpdate(float) override {};
 		void Update(float dT) override;
-		void Initialize() override{};
-		void LateUpdate(float) override{};
+		void Initialize() override {};
+		void LateUpdate(float) override {};
 
 		bool GetSquished() const { return m_Squished; }
 
+		void ResetStunned(float dt);
+		bool GetStunned() const { return m_Stunned; }
 	private:
 		GameObject* m_pPlayer;
 		float m_Speed{};
@@ -34,10 +36,15 @@ namespace dae
 		Transform m_GetOutOfStuck{};
 
 		bool m_Squished{};
-		bool m_Lefty{false};
+		bool m_Lefty{ false };
 
 		float m_SquishedTime{};
 		float m_MaxSquishedTime{ 1.f };
+
+		float m_StunnedTime{};
+		float m_MaxStunnedTime{2.f};
+
+		bool m_Stunned{};
 	};
 }
 

@@ -36,12 +36,7 @@ namespace dae
 			:m_Thread(&SDLSoundSystem::PlaySound, this)
 		{
 			pClips = clips;
-			//Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-		/*	if (SDL_Init(SDL_INIT_AUDIO) == -1) {
-				printf("SDL_Init: %s\n", SDL_GetError());
-				exit(1);
-			}*/
 			// open 44.1KHz, signed 16bit, system byte order,
 			//      stereo audio, using 1024 byte chunks
 			if (Mix_OpenAudio(44100, AUDIO_S32SYS, 2, 4096) == -1) {
@@ -54,6 +49,7 @@ namespace dae
 		{
 			Mix_CloseAudio();
 			m_Cleanup = true;
+			m_ConditionVar.notify_all();
 			m_Thread.join();
 		}
 
@@ -64,6 +60,8 @@ namespace dae
 			while(!m_Cleanup)
 			{
 				m_ConditionVar.wait(lk);
+				if (m_Cleanup)
+					return;
 				auto sound = Mix_LoadWAV(m_pActiveClips.front().second.c_str());
 				if (!sound)
 					return;

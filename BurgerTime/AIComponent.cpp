@@ -13,31 +13,58 @@ dae::AIComponent::AIComponent(GameObject* pOwner, GameObject* pPlayer, float spe
 	,m_Lefty(lefty)
 {
 	m_SquishedTime = m_MaxSquishedTime;
+	m_StunnedTime = m_MaxStunnedTime;
 }
 
 
 void dae::AIComponent::Update(float dt)
 {
+	if (m_Stunned)
+		ResetStunned(dt);
+
 	if (!m_Squished)
 		CalculatePath(m_pPlayer->GetWorldPosition());
 	else
 		Squished(dt);
 }
 
+void dae::AIComponent::ResetStunned(float dt)
+{
+	m_StunnedTime -= dt;
+	if(m_StunnedTime <= 0.f)
+	{
+		m_Stunned = false;
+		m_StunnedTime = m_MaxStunnedTime;
+	}
+}
+
 void dae::AIComponent::CalculatePath(const Transform& toPos)
 {
+	if (m_Stunned)
+		return;
+
 	auto& tileManager = TileManager::GetInstance();
 	auto currentTile = tileManager.GetTileAtPosition(GetOwner()->GetWorldPosition().GetPosition());
-	auto fromTilePos = currentTile->m_Boundingbox;
-	auto toTilePos = tileManager.GetTileAtPosition(toPos.GetPosition())->m_Boundingbox;
-	auto offSet = tileManager.GetTileWidth();
-	auto moveComp = GetOwner()->GetComponent<MovementComponent>();
 
-	if(currentTile->m_Falling)
+	if (currentTile->m_Falling)
 	{
 		m_Squished = true;
 		return;
 	}
+
+	auto moveComp = GetOwner()->GetComponent<MovementComponent>();
+
+	if (currentTile->m_Peppered)
+	{
+		moveComp->MoveRight(false);
+		moveComp->MoveUpLadder(false);
+		m_Stunned = true;
+		return;
+	}
+
+	auto fromTilePos = currentTile->m_Boundingbox;
+	auto toTilePos = tileManager.GetTileAtPosition(toPos.GetPosition())->m_Boundingbox;
+	auto offSet = tileManager.GetTileWidth();
 
 	if(m_Stuck)
 	{
@@ -129,24 +156,12 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				else
 				{
 					m_Stuck = true;
-					if(m_Lefty)
+					auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
+					for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
 					{
-						auto leftTile = tileManager.GetTileAtPosition({ fromTilePos.x - offSet, fromTilePos.w });
-						for (int i{}; leftTile->m_Type != TileType::Empty; ++i)
-						{
-							leftTile = tileManager.GetTileAtPosition({ fromTilePos.x - (i * offSet), fromTilePos.w });
-						}
-						m_GetOutOfStuck.SetPosition(leftTile->m_Boundingbox.z, toTilePos.y, 0.f);
+						rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + (i * offSet), fromTilePos.w });
 					}
-					else
-					{
-						auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
-						for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
-						{
-							rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + (i * offSet), fromTilePos.w });
-						}
-						m_GetOutOfStuck.SetPosition(rightTile->m_Boundingbox.z, toTilePos.y, 0.f);
-					}
+					m_GetOutOfStuck.SetPosition(rightTile->m_Boundingbox.z, toTilePos.y, 0.f);
 
 				}
 			}
@@ -160,24 +175,13 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				}
 				else
 				{
-					if (m_Lefty)
+					m_Stuck = true;
+					auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
+					for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
 					{
-						auto leftTile = tileManager.GetTileAtPosition({ fromTilePos.x - offSet, fromTilePos.w });
-						for (int i{}; leftTile->m_Type != TileType::Empty; ++i)
-						{
-							leftTile = tileManager.GetTileAtPosition({ fromTilePos.x - (i * offSet), fromTilePos.w });
-						}
-						m_GetOutOfStuck.SetPosition(leftTile->m_Boundingbox.z, toTilePos.y, 0.f);
+						rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + (i * offSet), fromTilePos.w });
 					}
-					else
-					{
-						auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
-						for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
-						{
-							rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + (i * offSet), fromTilePos.w });
-						}
-						m_GetOutOfStuck.SetPosition(rightTile->m_Boundingbox.z, toTilePos.y, 0.f);
-					}
+					m_GetOutOfStuck.SetPosition(rightTile->m_Boundingbox.z, toTilePos.y, 0.f);
 				}
 			}
 		}

@@ -4,6 +4,9 @@
 
 void dae::RenderComponent::Render()
 {
+	if (!m_Active)
+		return;
+
 	if (m_Texture != nullptr)
 	{
 		const auto& pos = GetTransform().GetPosition() + GetLocalTransform().GetPosition();

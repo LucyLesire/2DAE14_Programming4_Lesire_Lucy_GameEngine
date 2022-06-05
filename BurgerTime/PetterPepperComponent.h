@@ -4,6 +4,8 @@
 #include <SDL_rect.h>
 #include <vector>
 
+struct Tile;
+
 namespace dae
 {
 	enum class AnimationState
@@ -33,6 +35,7 @@ namespace dae
 
 		void Die();
 		void AddPoints();
+		void Pepper();
 		void PlaySound();
 		int GetLives() const { return m_Lives; };
 		int GetPoints() const { return m_Points; };
@@ -49,6 +52,14 @@ namespace dae
 
 		float m_LastSpriteUpdate{ };
 		float m_MaxSpriteUpdate{ 0.1f };
+
+		Tile* m_PepperedTile{};
+		float m_PepperTime{};
+		float m_MaxPepperTime{ 0.5f };
+
+		bool m_Dead{};
+
+		void UpdateAnimations(float dt);
 	};
 }
 

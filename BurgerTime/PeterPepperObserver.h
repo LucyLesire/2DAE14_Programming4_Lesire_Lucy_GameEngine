@@ -1,4 +1,5 @@
 #pragma once
+#include "AIComponent.h"
 #include "CollisionComponent.h"
 #include "EnemyComponent.h"
 #include "FloorComponent.h"
@@ -86,9 +87,10 @@ public:
 		}
 		case dae::Event::Collide:
 			{
-				if(pGo->GetComponent<dae::EnemyComponent>())
+				if(auto pEnemyAIComp = pGo->GetComponent<dae::AIComponent>())
 				{
-					m_pPlayer->GetComponent<dae::PetterPepperComponent>()->Die();
+					if(!pEnemyAIComp->GetStunned())
+						m_pPlayer->GetComponent<dae::PetterPepperComponent>()->Die();
 				}
 			}
 		}

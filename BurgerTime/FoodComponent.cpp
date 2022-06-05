@@ -31,7 +31,6 @@ void FoodComponent::FixedUpdate(float fDT)
 	if(m_Walked[0] == true && m_Walked[1] == true && m_Walked[2] == true && m_Walked[3] == true)
 	{
 		Fall(fDT);
-
 	}
 }
 
@@ -42,29 +41,22 @@ void FoodComponent::Initialize()
 
 void FoodComponent::Fall(float fDt)
 {
+	//Initializing tiles
 	auto& tileManager = TileManager::GetInstance();
-	Tile* underTile = nullptr;
-	if (m_CurrentTiles[0]->m_Index + 1 % 25 != 0)
-		underTile = tileManager.GetTileAtIndex(m_CurrentTiles[0]->m_Index + 1);
+	Tile* underTile = tileManager.GetTileAtIndex(m_CurrentTiles[0]->m_Index + 1);
 
+	//Initializing positions
 	auto prevPos = GetOwner()->GetWorldPosition().GetPosition();
 	auto newPosY = prevPos.y + m_FallSpeed * fDt;
 
-	if (underTile == nullptr)
-	{
-		for (auto& walked : m_Walked)
-			walked = false;
-		GetOwner()->SetPosition(prevPos.x, m_MaxY);
-		m_MaxY = 5000.f;
-		return;
-	}
-
+	//Check if falling on other ingredient
 	if(underTile->m_ExtraType != ExtraType::Empty)
 	{
 		m_MaxY = underTile->m_Boundingbox.y;
 		underTile->m_Pushed = true;
 	}
 
+	//Check if falling in tray
 	if (underTile->m_Type == TileType::Tray)
 	{
 		for (int i{}; i < m_CurrentTiles.size(); ++i)
@@ -82,6 +74,7 @@ void FoodComponent::Fall(float fDt)
 		return;
 	}
 
+	//Stop falling
 	if (newPosY >= m_MaxY - 1.f)
 	{
 		GetOwner()->SetPosition(prevPos.x, m_MaxY);
@@ -95,13 +88,14 @@ void FoodComponent::Fall(float fDt)
 			m_CurrentTiles[i]->m_Falling = false;
 			m_CurrentTiles[i]->m_Pushed = false;
 			m_Walked[i] = false;
-
 		}
 	}
 	else
 	{
+		//Fall
 		GetOwner()->SetPosition(prevPos.x, newPosY);
 
+		//Update tiles
 		for (int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			auto offset = i * tileManager.GetTileWidth();
@@ -110,9 +104,9 @@ void FoodComponent::Fall(float fDt)
 			if (newTile != m_CurrentTiles[i])
 			{
 				m_CurrentTiles[i]->m_Falling = false;
-				newTile->m_Falling = true;
 				m_CurrentTiles[i] = newTile;
 				m_CurrentTiles[i]->m_Pushed = false;
+				m_CurrentTiles[i]->m_Falling = true;
 			}
 		}
 

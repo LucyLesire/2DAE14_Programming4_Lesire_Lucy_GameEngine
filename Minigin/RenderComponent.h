@@ -27,6 +27,7 @@ namespace dae
 		void SetSrcRect(const SDL_Rect& srcRect) { m_SrcRect = srcRect; }
 
 		void SetFlipped(bool enable) { m_Flipped = enable; }
+		void SetActive(bool activate) { m_Active = activate; }
 	protected:
 		std::shared_ptr<dae::Texture2D> m_Texture;
 		bool m_NeedsUpdate = false;
@@ -35,6 +36,7 @@ namespace dae
 		bool m_Flipped{};
 		Transform2D m_Size{};
 		SDL_Rect m_SrcRect{};
+		bool m_Active{ true };
 	};
 }
 

@@ -24,6 +24,9 @@
     <Filter Include="Tile">
       <UniqueIdentifier>{c3de832d-1021-46b2-b3e9-7fc26665d3a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{6bd10482-b961-446d-8caa-c1ec999c567a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MovementComponent.cpp">
@@ -48,9 +51,6 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="BurgerTimeGame.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="BurgerTimeMainScene.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="BurgerTimePCH.cpp">
@@ -89,6 +89,12 @@
     <ClCompile Include="EnemyComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BurgerTimeMainScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="BurgerTimeMenu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MovementComponent.h">
@@ -110,9 +116,6 @@
       <Filter>Observers</Filter>
     </ClInclude>
     <ClInclude Include="BurgerTimeGame.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="BurgerTimeMainScene.h">
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="BurgerTimePCH.h">
@@ -150,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="EnemyComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimeMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimeMainScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
