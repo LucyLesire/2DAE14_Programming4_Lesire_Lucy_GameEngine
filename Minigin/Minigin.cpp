@@ -120,6 +120,8 @@ void dae::Minigin::Run(dae::BaseGame* pCurrentGame)
 			sceneManager.LateUpdate(deltaTime);
 
 			renderer.Render();
+
+			sceneManager.RestartSceneAtEndGameLoop();
 		}
 	}
 

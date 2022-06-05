@@ -102,7 +102,7 @@ void dae::MovementComponent::MoveDownLadder(bool enable)
 		auto pos = GetOwner()->GetWorldPosition().GetPosition();
 		auto tileToDown = tileManager.GetTileAtPosition({ pos.x, pos.y - (pos.y - m_CurrentTile->m_Boundingbox.w) });
 
-		if (tileToDown->m_Type == TileType::Ladder || tileToDown->m_Type == TileType::Floor || tileToDown->m_Boundingbox.y == 720.f)
+		if (tileToDown->m_Type == TileType::Ladder || tileToDown->m_Type == TileType::Floor)
 		{
 			m_MoveDir.SetPosition(m_MoveDir.GetPosition().x, 1, m_MoveDir.GetPosition().z);
 			return;

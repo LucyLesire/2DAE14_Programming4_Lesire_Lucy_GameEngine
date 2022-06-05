@@ -95,6 +95,9 @@
     <ClCompile Include="BurgerTimeMenu.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="MenuCommands.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MovementComponent.h">
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="BurgerTimeMainScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuCommands.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

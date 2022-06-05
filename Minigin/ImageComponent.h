@@ -13,7 +13,7 @@ namespace dae
 		void LateUpdate(float) override {};
 		void Initialize() override;
 
-		explicit ImageComponent(const std::string& fileName, float zPos = 0);
+		explicit ImageComponent(const std::string& fileName);
 		ImageComponent() = default;
 		virtual ~ImageComponent() = default;
 		ImageComponent(const ImageComponent& other) = delete;

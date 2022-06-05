@@ -10,6 +10,16 @@
 
 void dae::PetterPepperComponent::Update(float dt)
 {
+	if(m_Dead)
+	{
+		m_DeadTime -= dt;
+		if(m_DeadTime <= 0.f)
+		{
+			GetSubject()->Notify(GetOwner(), Event::Restart);
+		}
+	}
+
+
 	if(m_PepperedTile)
 	{
 		if(m_PepperedTile->m_Peppered)

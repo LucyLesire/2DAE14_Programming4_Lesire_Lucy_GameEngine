@@ -89,3 +89,10 @@ bool dae::InputManager::GetControllerInput(std::vector<std::pair<unsigned int, s
 	return false;
 }
 
+void dae::InputManager::ResetCommands()
+{
+	m_KeyboardCommands.clear();
+	m_pController->RemoveCommands();
+}
+
+

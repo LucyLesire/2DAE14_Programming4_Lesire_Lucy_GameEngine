@@ -58,6 +58,7 @@ namespace dae
 		float m_MaxPepperTime{ 0.5f };
 
 		bool m_Dead{};
+		float m_DeadTime{2.f};
 
 		void UpdateAnimations(float dt);
 	};

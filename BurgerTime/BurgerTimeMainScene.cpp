@@ -34,8 +34,8 @@
 #include "rapidjson/document.h"
 #include "TileManager.h"
 
-dae::BurgerTimeMainScene::BurgerTimeMainScene(const std::string& name)
-	:Scene(name)
+dae::BurgerTimeMainScene::BurgerTimeMainScene(const std::string& name, uint32_t width, uint32_t height, unsigned int id)
+	:Scene(name, width, height, id)
 {
 }
 
@@ -79,6 +79,7 @@ void dae::BurgerTimeMainScene::Initialize()
 	Add(goHealth);
 	
 	goPlayer1->GetComponent<PetterPepperComponent>()->GetSubject()->AddObserver(std::make_shared<PointObserver>(goHealth->GetComponent<TextComponent>()));
+	goPlayer1->GetComponent<PetterPepperComponent>()->GetSubject()->AddObserver(std::make_shared<PetterPepperObserver>());
 
 	Add(goPlayer1);
 

@@ -14,7 +14,7 @@ namespace dae
 		virtual void LateUpdate(float) override = 0;
 		void Render();
 
-		RenderComponent() = default;
+		RenderComponent(bool centered = false) : m_Centered(centered) {};
 		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& other) = delete;
 		RenderComponent(RenderComponent&& other) = delete;
@@ -31,12 +31,14 @@ namespace dae
 	protected:
 		std::shared_ptr<dae::Texture2D> m_Texture;
 		bool m_NeedsUpdate = false;
-		float m_zPos{};
+
 	private:
 		bool m_Flipped{};
 		Transform2D m_Size{};
 		SDL_Rect m_SrcRect{};
 		bool m_Active{ true };
+
+		bool m_Centered{};
 	};
 }
 

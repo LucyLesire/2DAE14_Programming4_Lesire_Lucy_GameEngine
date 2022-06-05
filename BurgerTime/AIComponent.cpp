@@ -168,7 +168,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 			else
 			{
 				auto downTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w + offSet });
-				if (downTile->m_Type != TileType::Empty)
+				if (downTile->m_Type != TileType::Empty || (downTile->m_Type == TileType::Floor && currentTile->m_Type != TileType::Floor))
 				{
 					moveComp->MoveLeft(false);
 					moveComp->MoveDownLadder(true);

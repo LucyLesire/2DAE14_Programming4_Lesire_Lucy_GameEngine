@@ -7,7 +7,7 @@ void dae::TextComponent::Update(float)
 {
 	if (m_NeedsUpdate)
 	{
-		const SDL_Color color = { 255,255,255 }; // only white text is supported now
+		const SDL_Color color = m_Color;
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr)
 		{
@@ -24,9 +24,12 @@ void dae::TextComponent::Update(float)
 	}
 }
 
-dae::TextComponent::TextComponent(const std::string& text, const std::shared_ptr<dae::Font>& font)
-	:m_Text{text}
+dae::TextComponent::TextComponent(const std::string& text, const std::shared_ptr<dae::Font>& font, const SDL_Color& color, bool centered)
+	:RenderComponent(centered)
+	,m_Text{text}
 	,m_Font{font}
+	,m_Color{color}
+	,m_Centered{centered}
 {
 }
 

@@ -91,6 +91,11 @@ public:
 	{
 		m_ControllerCommands[std::make_pair(id, button)] = nullptr;
 	}
+
+	void RemoveCommands()
+	{
+		m_ControllerCommands.clear();
+	}
 };
 
 std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> dae::XboxController::ProcessInput()
@@ -121,6 +126,11 @@ void dae::XboxController::AddCommand(const std::map<ControllerButton, std::share
 void dae::XboxController::RemoveCommand(const ControllerButton& button, unsigned int id)
 {
 	pImpl->RemoveCommand(button, id);
+}
+
+void dae::XboxController::RemoveCommands()
+{
+	pImpl->RemoveCommands();
 }
 
 dae::XboxController::XboxController()

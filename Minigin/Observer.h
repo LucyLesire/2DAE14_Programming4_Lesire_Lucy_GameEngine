@@ -15,7 +15,8 @@ namespace dae
 		UnCollideFloor,
 		CollideLadder,
 		UnCollideLadder,
-		Collide
+		Collide,
+		Restart
 	};
 
 	class Observer

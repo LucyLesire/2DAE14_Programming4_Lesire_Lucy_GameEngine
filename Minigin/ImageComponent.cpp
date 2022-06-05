@@ -14,8 +14,7 @@ void dae::ImageComponent::Initialize()
 {
 }
 
-dae::ImageComponent::ImageComponent(const std::string& fileName, float zPos)
+dae::ImageComponent::ImageComponent(const std::string& fileName)
 {
-	m_zPos = zPos;
 	m_Texture = dae::ResourceManager::GetInstance().LoadTexture(fileName);
 }

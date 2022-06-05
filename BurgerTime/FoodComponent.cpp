@@ -54,6 +54,10 @@ void FoodComponent::Fall(float fDt)
 	{
 		m_MaxY = underTile->m_Boundingbox.y;
 		underTile->m_Pushed = true;
+		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		{
+			m_CurrentTiles[i]->m_Falling = false;
+		}
 	}
 
 	//Check if falling in tray

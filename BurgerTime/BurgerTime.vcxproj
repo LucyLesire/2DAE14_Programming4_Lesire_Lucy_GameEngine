@@ -30,6 +30,7 @@
     <ClCompile Include="FPSComponent.cpp" />
     <ClCompile Include="LadderComponent.cpp" />
     <ClCompile Include="LadderPrefab.cpp" />
+    <ClCompile Include="MenuCommands.cpp" />
     <ClCompile Include="MoveCommands.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="EnemyComponent.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="FPSComponent.h" />
     <ClInclude Include="LadderComponent.h" />
     <ClInclude Include="LadderPrefab.h" />
+    <ClInclude Include="MenuCommands.h" />
     <ClInclude Include="MoveCommands.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="EnemyComponent.h" />

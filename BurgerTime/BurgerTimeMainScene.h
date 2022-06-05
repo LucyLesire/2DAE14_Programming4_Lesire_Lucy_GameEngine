@@ -12,7 +12,7 @@ namespace  dae
 	class BurgerTimeMainScene : public dae::Scene
 	{
 	public:
-		BurgerTimeMainScene(const std::string& name);
+		BurgerTimeMainScene(const std::string& name, uint32_t width, uint32_t height, unsigned int id);
 		~BurgerTimeMainScene() = default;
 		BurgerTimeMainScene(const BurgerTimeMainScene& other) = delete;
 		BurgerTimeMainScene(BurgerTimeMainScene&& other) noexcept = delete;

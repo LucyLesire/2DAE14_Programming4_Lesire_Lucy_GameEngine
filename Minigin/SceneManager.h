@@ -19,9 +19,17 @@ namespace dae
 		void Render();
 		void FixedUpdate(float fDT);
 		void LateUpdate(float dT);
+
+		void SetActiveScene(std::shared_ptr<Scene> scene);
+		void RestartScene();
+
+		void RestartSceneAtEndGameLoop();
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
 		std::vector<std::shared_ptr<Scene>> m_Scenes;
+
+		std::shared_ptr<Scene> m_ActiveScene{};
+		bool m_RestartScene{};
 	};
 }

@@ -4,41 +4,78 @@
 
 void dae::SceneManager::Initialize()
 {
-	for (auto& scene : m_Scenes)
-	{
-		scene->Initialize();
-	}
+	m_ActiveScene->Initialize();
+	m_ActiveScene->SetInitialized();
+	//for (auto& scene : m_Scenes)
+	//{
+	//	scene->Initialize();
+	//}
 }
 
 void dae::SceneManager::Update(float dT)
 {
-	for(auto& scene : m_Scenes)
-	{
-		scene->Update(dT);
-	}
+	if(m_ActiveScene->GetInitialized())
+		m_ActiveScene->Update(dT);
+	//for(auto& scene : m_Scenes)
+	//{
+	//	scene->Update(dT);
+	//}
 }
 
 void dae::SceneManager::Render()
 {
-	for (const auto& scene : m_Scenes)
-	{
-		scene->Render();
-	}
+	if (m_ActiveScene->GetInitialized())
+		m_ActiveScene->Render();
+	//for (const auto& scene : m_Scenes)
+	//{
+	//	scene->Render();
+	//}
 }
 
 void dae::SceneManager::FixedUpdate(float fDT)
 {
-	for (const auto& scene : m_Scenes)
-	{
-		scene->FixedUpdate(fDT);
-	}
+	if (m_ActiveScene->GetInitialized())
+		m_ActiveScene->FixedUpdate(fDT);
+	//for (const auto& scene : m_Scenes)
+	//{
+	//	scene->FixedUpdate(fDT);
+	//}
 }
 
 void dae::SceneManager::LateUpdate(float dT)
 {
-	for(const auto& scene: m_Scenes)
+	if (m_ActiveScene->GetInitialized())
+		m_ActiveScene->LateUpdate(dT);
+	//for(const auto& scene: m_Scenes)
+	//{
+	//	scene->LateUpdate(dT);
+	//}
+}
+
+void dae::SceneManager::SetActiveScene(std::shared_ptr<Scene> scene)
+{
+	m_ActiveScene = scene;
+	Initialize();
+}
+
+void dae::SceneManager::RestartScene()
+{
+	m_RestartScene = true;
+}
+
+void dae::SceneManager::RestartSceneAtEndGameLoop()
+{
+	if(m_RestartScene)
 	{
-		scene->LateUpdate(dT);
+		auto id = m_ActiveScene->GetId();
+		m_ActiveScene->SetInitialized(false);
+		m_ActiveScene->RemoveAll();
+
+		m_ActiveScene = m_Scenes[id];
+		m_ActiveScene->Initialize();
+		m_ActiveScene->SetInitialized(true);
+
+		m_RestartScene = false;
 	}
 }
 

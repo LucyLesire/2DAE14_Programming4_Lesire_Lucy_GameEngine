@@ -41,6 +41,7 @@ namespace dae
 		void AddCommand(const std::map<ControllerButton, std::shared_ptr<Command>>& inputCommands, unsigned int id);
 		void AddCommand(const std::map<SDL_Scancode, std::shared_ptr<Command>>& inputCommands, unsigned int id);
 		void RemoveCommand(const ControllerButton& button, unsigned int id);
+		void ResetCommands();
 	private:
 		XboxController* m_pController;
 		bool GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands);

@@ -8,9 +8,7 @@
 
 using namespace dae;
 
-unsigned int Scene::m_IdCounter = 0;
-
-Scene::Scene(const std::string& name) : m_Name(name) {}
+Scene::Scene(const std::string& name, uint32_t width, uint32_t height, unsigned int id) : m_Name(name), m_Width(width), m_Height(height), m_IdCounter(id) {}
 
 Scene::~Scene() = default;
 
@@ -82,5 +80,10 @@ void dae::Scene::RemoveObjects()
 		{
 			return obj->GetDestroyed();
 		}), m_Objects.end());
+}
+
+void dae::Scene::RemoveAll()
+{
+	m_Objects.erase(m_Objects.begin(), m_Objects.end());
 }
 

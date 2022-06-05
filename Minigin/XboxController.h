@@ -23,6 +23,7 @@ namespace dae
 
 		void AddCommand(const std::map<ControllerButton, std::shared_ptr<Command>>& inputCommands, unsigned int id);
 		void RemoveCommand(const ControllerButton& button, unsigned int id);
+		void RemoveCommands();
 
 		explicit XboxController();
 		~XboxController();
