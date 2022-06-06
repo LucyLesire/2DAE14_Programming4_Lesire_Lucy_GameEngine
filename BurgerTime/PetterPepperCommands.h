@@ -24,7 +24,7 @@ class PointCommand : public Command
 public:
 	void Execute() override
 	{
-		GetObject()->GetComponent<dae::PetterPepperComponent>()->AddPoints();
+		//GetObject()->GetComponent<dae::PetterPepperComponent>()->AddPoints();
 	}
 	void Release() override {};
 	PointCommand(dae::GameObject* go)

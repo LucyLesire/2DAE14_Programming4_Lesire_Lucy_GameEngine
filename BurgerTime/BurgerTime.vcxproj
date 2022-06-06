@@ -24,12 +24,9 @@
     <ClCompile Include="BurgerTimeMainScene.cpp" />
     <ClCompile Include="BurgerTimeMenu.cpp" />
     <ClCompile Include="BurgerTimePCH.cpp" />
-    <ClCompile Include="FloorComponent.cpp" />
-    <ClCompile Include="FloorPrefab.cpp" />
     <ClCompile Include="FoodComponent.cpp" />
     <ClCompile Include="FPSComponent.cpp" />
-    <ClCompile Include="LadderComponent.cpp" />
-    <ClCompile Include="LadderPrefab.cpp" />
+    <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="MenuCommands.cpp" />
     <ClCompile Include="MoveCommands.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
@@ -39,7 +36,6 @@
     <ClCompile Include="PetterPepperComponent.cpp" />
     <ClCompile Include="PetterPepperDisplays.cpp" />
     <ClCompile Include="BurgerTime.cpp" />
-    <ClCompile Include="PointObserver.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="TileManager.cpp" />
   </ItemGroup>
@@ -49,12 +45,9 @@
     <ClInclude Include="BurgerTimeMainScene.h" />
     <ClInclude Include="BurgerTimeMenu.h" />
     <ClInclude Include="BurgerTimePCH.h" />
-    <ClInclude Include="FloorComponent.h" />
-    <ClInclude Include="FloorPrefab.h" />
     <ClInclude Include="FoodComponent.h" />
     <ClInclude Include="FPSComponent.h" />
-    <ClInclude Include="LadderComponent.h" />
-    <ClInclude Include="LadderPrefab.h" />
+    <ClInclude Include="GameInstance.h" />
     <ClInclude Include="MenuCommands.h" />
     <ClInclude Include="MoveCommands.h" />
     <ClInclude Include="MovementComponent.h" />
@@ -63,7 +56,6 @@
     <ClInclude Include="PetterPepperCommands.h" />
     <ClInclude Include="PetterPepperComponent.h" />
     <ClInclude Include="PetterPepperDisplays.h" />
-    <ClInclude Include="PointObserver.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="TileManager.h" />
   </ItemGroup>

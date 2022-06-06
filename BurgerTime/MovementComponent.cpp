@@ -27,6 +27,31 @@ void dae::MovementComponent::Update(float)
 
 		m_CurrentTile = newTile;
 	}
+
+	if (m_CurrentTile->m_Type == TileType::Empty)
+	{
+		auto& tileManager = TileManager::GetInstance();
+		auto rightTile = tileManager.GetTileAtPosition({ m_CurrentTile->m_Boundingbox.w + 2.f, m_CurrentTile->m_Boundingbox.y });
+		if (rightTile->m_Type != TileType::Empty)
+			MoveRight(true);
+		else
+		{
+			auto leftTile = tileManager.GetTileAtPosition({ m_CurrentTile->m_Boundingbox.x - 2.f, m_CurrentTile->m_Boundingbox.y});
+			if (leftTile->m_Type != TileType::Empty)
+				MoveLeft(true);
+		}
+
+		m_WasStuck = true;
+	}
+
+	if(m_WasStuck)
+	{
+		if(m_CurrentTile->m_Type != TileType::Empty)
+		{
+			MoveLeft(false);
+			m_WasStuck = false;
+		}
+	}
 }
 
 void dae::MovementComponent::FixedUpdate(float fDT)
@@ -64,11 +89,11 @@ void dae::MovementComponent::MoveLeft(bool enable)
 	{
 		auto& tileManager = TileManager::GetInstance();
 		auto pos = GetOwner()->GetWorldPosition().GetPosition();
-		pos.x += 50.f;
+		pos.x += 25.f;
 		auto tileToLeft = tileManager.GetTileAtPosition({ pos.x + (m_CurrentTile->m_Boundingbox.x - m_CurrentTile->m_Boundingbox.z), pos.y });
-		if (tileToLeft->m_Type == TileType::Floor || tileToLeft->m_Boundingbox.x == 0.f)
+		if (tileToLeft->m_Type == TileType::Floor)
 		{
-			GetOwner()->SetPosition(pos.x - 50.f, m_CurrentTile->m_Boundingbox.y);
+			GetOwner()->SetPosition(pos.x - 25.f, m_CurrentTile->m_Boundingbox.y);
 			m_MoveDir.SetPosition(-1, m_MoveDir.GetPosition().y, m_MoveDir.GetPosition().z);
 			return;
 		}
@@ -100,7 +125,7 @@ void dae::MovementComponent::MoveDownLadder(bool enable)
 	{
 		auto& tileManager = TileManager::GetInstance();
 		auto pos = GetOwner()->GetWorldPosition().GetPosition();
-		auto tileToDown = tileManager.GetTileAtPosition({ pos.x, pos.y - (pos.y - m_CurrentTile->m_Boundingbox.w) });
+		auto tileToDown = tileManager.GetTileAtPosition({ pos.x + 25.f, pos.y - (pos.y - m_CurrentTile->m_Boundingbox.w) });
 
 		if (tileToDown->m_Type == TileType::Ladder || tileToDown->m_Type == TileType::Floor)
 		{
@@ -117,7 +142,7 @@ void dae::MovementComponent::MoveUpLadder(bool enable)
 	{
 		auto& tileManager = TileManager::GetInstance();
 		auto pos = GetOwner()->GetWorldPosition().GetPosition();
-		auto tileToUp = tileManager.GetTileAtPosition({ pos.x, pos.y + (pos.y - m_CurrentTile->m_Boundingbox.w) });
+		auto tileToUp = tileManager.GetTileAtPosition({ pos.x + 25.f, pos.y + (pos.y - m_CurrentTile->m_Boundingbox.w) });
 		if (tileToUp->m_Type == TileType::Ladder || tileToUp->m_Type == TileType::Floor)
 		{
 			m_MoveDir.SetPosition(m_MoveDir.GetPosition().x, -1, m_MoveDir.GetPosition().z);

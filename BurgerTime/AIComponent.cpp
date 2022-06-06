@@ -1,5 +1,6 @@
 #include "AIComponent.h"
 
+#include "EnemyComponent.h"
 #include "GameObject.h"
 #include "MovementComponent.h"
 #include "Observer.h"
@@ -63,6 +64,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 	}
 
 	auto fromTilePos = currentTile->m_Boundingbox;
+	auto pos = GetOwner()->GetWorldPosition().GetPosition();
 	auto toTilePos = tileManager.GetTileAtPosition(toPos.GetPosition())->m_Boundingbox;
 	auto offSet = tileManager.GetTileWidth();
 
@@ -114,7 +116,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 		}
 		else if (fromTilePos.x > toTilePos.x)
 		{
-			auto leftTile = tileManager.GetTileAtPosition({ fromTilePos.z - offSet, fromTilePos.y });
+			auto leftTile = tileManager.GetTileAtPosition({ pos.x - offSet, fromTilePos.y });
 			if (leftTile->m_Type != TileType::Empty)
 			{
 				moveComp->MoveLeft(true);
@@ -220,7 +222,6 @@ void dae::AIComponent::Squished(float dt)
 	if(m_SquishedTime <= 0)
 	{
 		GetOwner()->Destroy();
-		m_pPlayer->GetComponent<PetterPepperComponent>()->GetSubject()->Notify(m_pPlayer, Event::GotPoints);
 	}
 }
 

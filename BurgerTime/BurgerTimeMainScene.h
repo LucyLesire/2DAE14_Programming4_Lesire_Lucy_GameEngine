@@ -7,12 +7,11 @@ namespace  dae
 {
 	class SDLSoundSystem;
 	class Prefab;
-	class LadderPrefab;
 
 	class BurgerTimeMainScene : public dae::Scene
 	{
 	public:
-		BurgerTimeMainScene(const std::string& name, uint32_t width, uint32_t height, unsigned int id);
+		BurgerTimeMainScene(const std::string& name, uint32_t width, uint32_t height, unsigned int id, const std::string& levelFile);
 		~BurgerTimeMainScene() = default;
 		BurgerTimeMainScene(const BurgerTimeMainScene& other) = delete;
 		BurgerTimeMainScene(BurgerTimeMainScene&& other) noexcept = delete;
@@ -20,13 +19,16 @@ namespace  dae
 		BurgerTimeMainScene& operator=(BurgerTimeMainScene&& other) noexcept = delete;
 
 		void Initialize() override;
+		void Update(float dT) override;
 
 	private:
-		void ReadJson(const std::wstring& fileLoc);
-
-		std::vector<std::shared_ptr<Prefab>> m_pPrefabs{};
+		void ReadJson(const std::string& fileLoc);
 
 		std::shared_ptr<SDLSoundSystem> m_pSoundSystem{};
+
+		std::string m_LevelFile{};
+
+		int m_Rows{};
 	};
 }
 

@@ -2,6 +2,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+
+#include "GameInstance.h"
 #include "Observer.h"
 #include "PetterPepperComponent.h"
 
@@ -40,16 +42,30 @@ public:
 	virtual ~PointDisplay() = default;
 	void OnNotify(dae::GameObject* pGo, dae::Event event)
 	{
+		auto pp = pGo->GetComponent<dae::PetterPepperComponent>();
 		switch (event)
 		{
-		case dae::Event::GotPoints:
-			auto pp = pGo->GetComponent<dae::PetterPepperComponent>();
-			const std::string liveTemplate = "Points: ";
+		case dae::Event::BurgerDropped:
+			pp->AddPoints(50);
 			if (pp)
 			{
-				m_pTextComponent->SetText(liveTemplate + std::to_string(pp->GetPoints()));
+				m_pTextComponent->SetText(m_ScoreTemplate + std::to_string(pp->GetPoints()));
 			}
-
+			break;
+		case dae::Event::BurgerCompleted:
+			pp->AddPoints(500);
+			if (pp)
+			{
+				m_pTextComponent->SetText(m_ScoreTemplate + std::to_string(pp->GetPoints()));
+			}
+			GameInstance::GetInstance().AddBurgersDropped();
+			break;
+		case dae::Event::EnemyKilled:
+			if (pp)
+			{
+				m_pTextComponent->SetText(m_ScoreTemplate + std::to_string(pp->GetPoints()));
+			}
+			break;
 		}
 	}
 
@@ -60,5 +76,6 @@ public:
 	};
 private:
 	std::shared_ptr<dae::TextComponent> m_pTextComponent;
+	const std::string m_ScoreTemplate = "Score: ";
 };
 

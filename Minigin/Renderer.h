@@ -1,5 +1,4 @@
 #pragma once
-#include "GraphObject.h"
 #include "Singleton.h"
 
 namespace dae
@@ -30,4 +29,3 @@ namespace dae
 	private:
 	};
 }
-

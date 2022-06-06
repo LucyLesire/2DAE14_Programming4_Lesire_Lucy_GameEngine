@@ -112,7 +112,6 @@
     <ClInclude Include="ServiceLocator.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="GraphObject.h" />
     <ClInclude Include="GameObject.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -190,7 +189,6 @@
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="GraphObject.cpp" />
     <ClCompile Include="Font.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>

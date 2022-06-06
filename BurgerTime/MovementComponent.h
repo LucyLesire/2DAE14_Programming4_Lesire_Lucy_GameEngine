@@ -60,11 +60,11 @@ namespace dae
 
 		Tile* m_CurrentTile{};
 
-		bool m_DisableGravity{};
-
 		bool m_IsPlayer{};
 
 		bool m_Dead{};
+
+		bool m_WasStuck{};
 	};
 }
 

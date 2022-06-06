@@ -1,5 +1,7 @@
 #include "MiniginPCH.h"
 #include "SceneManager.h"
+
+#include "InputManager.h"
 #include "Scene.h"
 
 void dae::SceneManager::Initialize()
@@ -54,13 +56,45 @@ void dae::SceneManager::LateUpdate(float dT)
 
 void dae::SceneManager::SetActiveScene(std::shared_ptr<Scene> scene)
 {
-	m_ActiveScene = scene;
-	Initialize();
+	if (!m_ActiveScene)
+	{
+		m_ActiveScene = scene;
+		m_ActiveScene->Initialize();
+	}
+	else
+	{
+		m_SceneToChangeTo = scene;
+		m_SceneChange = true;
+	}
+
+}
+
+void dae::SceneManager::SetSceneAtEndGameLoop()
+{
+	if(m_SceneChange)
+	{
+		if (m_ActiveScene)
+		{
+			m_ActiveScene->SetInitialized(false);
+			m_ActiveScene->RemoveAll();
+		}
+		m_ActiveScene = m_SceneToChangeTo;
+		InputManager::GetInstance().ResetCommands();
+		m_ActiveScene->Initialize();
+		m_ActiveScene->SetInitialized(true);
+		m_SceneChange = false;
+	}
 }
 
 void dae::SceneManager::RestartScene()
 {
 	m_RestartScene = true;
+}
+
+void dae::SceneManager::EndGameLoop()
+{
+	RestartSceneAtEndGameLoop();
+	SetSceneAtEndGameLoop();
 }
 
 void dae::SceneManager::RestartSceneAtEndGameLoop()

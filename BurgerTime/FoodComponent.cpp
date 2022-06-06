@@ -48,6 +48,10 @@ void FoodComponent::Fall(float fDt)
 	//Initializing positions
 	auto prevPos = GetOwner()->GetWorldPosition().GetPosition();
 	auto newPosY = prevPos.y + m_FallSpeed * fDt;
+	for (int i{}; i < m_CurrentTiles.size(); ++i)
+	{
+		m_CurrentTiles[i]->m_Falling = true;
+	}
 
 	//Check if falling on other ingredient
 	if(underTile->m_ExtraType != ExtraType::Empty)
@@ -73,7 +77,7 @@ void FoodComponent::Fall(float fDt)
 		}
 		if(m_Type == ExtraType::TopBun)
 		{
-			m_pPlayer->GetComponent<dae::PetterPepperComponent>()->GetSubject()->Notify(m_pPlayer, dae::Event::GotPoints);
+			m_pPlayer->GetComponent<dae::PetterPepperComponent>()->GetSubject()->Notify(m_pPlayer, dae::Event::BurgerCompleted);
 		}
 		return;
 	}
@@ -93,6 +97,7 @@ void FoodComponent::Fall(float fDt)
 			m_CurrentTiles[i]->m_Pushed = false;
 			m_Walked[i] = false;
 		}
+		m_pPlayer->GetComponent<dae::PetterPepperComponent>()->GetSubject()->Notify(m_pPlayer, dae::Event::BurgerDropped);
 	}
 	else
 	{
@@ -110,7 +115,6 @@ void FoodComponent::Fall(float fDt)
 				m_CurrentTiles[i]->m_Falling = false;
 				m_CurrentTiles[i] = newTile;
 				m_CurrentTiles[i]->m_Pushed = false;
-				m_CurrentTiles[i]->m_Falling = true;
 			}
 		}
 

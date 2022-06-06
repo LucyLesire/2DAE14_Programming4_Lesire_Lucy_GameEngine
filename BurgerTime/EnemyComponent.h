@@ -15,7 +15,7 @@ namespace dae
 		void Initialize() override {};
 		void LateUpdate(float) override {};
 
-		EnemyComponent(GameObject* pOwner, int score);
+		EnemyComponent(GameObject* pOwner, int score, GameObject* pPlayer);
 		virtual ~EnemyComponent() = default;
 		EnemyComponent(const EnemyComponent& other) = delete;
 		EnemyComponent(EnemyComponent&& other) = delete;
@@ -36,5 +36,7 @@ namespace dae
 		float m_DeadMaxSpriteUpdate{ 1.f/4.f };
 
 		int m_Score{};
+
+		GameObject* m_pPlayer{};
 	};
 }

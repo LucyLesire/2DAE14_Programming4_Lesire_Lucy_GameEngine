@@ -4,6 +4,7 @@
 #include "ImageComponent.h"
 #include "GameObject.h"
 #include "MovementComponent.h"
+#include "Observer.h"
 
 void dae::EnemyComponent::Update(float dT)
 {
@@ -11,6 +12,8 @@ void dae::EnemyComponent::Update(float dT)
 	{
 		m_AnimState = AnimationState::Dead;
 		m_AnimStateDirty = true;
+		m_pPlayer->GetComponent<dae::PetterPepperComponent>()->AddPoints(m_Score);
+		m_pPlayer->GetComponent<dae::PetterPepperComponent>()->GetSubject()->Notify(m_pPlayer, dae::Event::EnemyKilled);
 	}
 	else if (m_AnimState != AnimationState::WalkingLeft && GetOwner()->GetComponent<MovementComponent>()->GetMoveDir().GetPosition().x < -0.1f)
 	{
@@ -118,9 +121,10 @@ void dae::EnemyComponent::Update(float dT)
 
 }
 
-dae::EnemyComponent::EnemyComponent(dae::GameObject* pOwner, int score)
+dae::EnemyComponent::EnemyComponent(dae::GameObject* pOwner, int score, GameObject* pPlayer)
 	:BaseComponent(pOwner)
 	, m_Score(score)
+	,m_pPlayer(pPlayer)
 {
 	m_DeadLastSpriteUpdate = m_DeadMaxSpriteUpdate;
 	m_LastSpriteUpdate = m_MaxSpriteUpdate;

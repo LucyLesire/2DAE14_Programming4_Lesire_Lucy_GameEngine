@@ -228,7 +228,6 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="GraphObject.h" />
     <ClInclude Include="ImageComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Minigin.h" />
@@ -304,7 +303,6 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphObject.cpp" />
     <ClCompile Include="ImageComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Minigin.cpp" />

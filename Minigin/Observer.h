@@ -10,11 +10,9 @@ namespace dae
 	enum class Event
 	{
 		Died,
-		GotPoints,
-		CollideFloor,
-		UnCollideFloor,
-		CollideLadder,
-		UnCollideLadder,
+		BurgerCompleted,
+		BurgerDropped,
+		EnemyKilled,
 		Collide,
 		Restart
 	};

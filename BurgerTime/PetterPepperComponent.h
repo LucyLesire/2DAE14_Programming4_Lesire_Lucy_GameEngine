@@ -34,7 +34,7 @@ namespace dae
 		PetterPepperComponent& operator=(PetterPepperComponent&& other) = delete;
 
 		void Die();
-		void AddPoints();
+		void AddPoints(int amount);
 		void Pepper();
 		void PlaySound();
 		int GetLives() const { return m_Lives; };

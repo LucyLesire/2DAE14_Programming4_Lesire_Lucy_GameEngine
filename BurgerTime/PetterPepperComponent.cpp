@@ -103,11 +103,9 @@ void dae::PetterPepperComponent::Die()
 	}
 }
 
-void dae::PetterPepperComponent::AddPoints()
+void dae::PetterPepperComponent::AddPoints(int amount)
 {
-	const int addedPoints = 50;
-	m_Points += addedPoints;
-	GetSubject()->Notify(GetOwner(), Event::GotPoints);
+	m_Points += amount;
 }
 
 void dae::PetterPepperComponent::Pepper()

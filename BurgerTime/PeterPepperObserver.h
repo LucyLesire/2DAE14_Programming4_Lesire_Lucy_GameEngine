@@ -2,8 +2,6 @@
 #include "AIComponent.h"
 #include "CollisionComponent.h"
 #include "EnemyComponent.h"
-#include "FloorComponent.h"
-#include "LadderComponent.h"
 #include "MovementComponent.h"
 #include "Observer.h"
 #include "SceneManager.h"

@@ -121,7 +121,7 @@ void dae::Minigin::Run(dae::BaseGame* pCurrentGame)
 
 			renderer.Render();
 
-			sceneManager.RestartSceneAtEndGameLoop();
+			sceneManager.EndGameLoop();
 		}
 	}
 

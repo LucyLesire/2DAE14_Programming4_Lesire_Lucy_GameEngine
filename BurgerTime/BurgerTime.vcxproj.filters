@@ -59,18 +59,6 @@
     <ClCompile Include="PeterPepperObserver.cpp">
       <Filter>Observers</Filter>
     </ClCompile>
-    <ClCompile Include="LadderPrefab.cpp">
-      <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="LadderComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="FloorPrefab.cpp">
-      <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="FloorComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
@@ -79,9 +67,6 @@
     </ClCompile>
     <ClCompile Include="FoodComponent.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="PointObserver.cpp">
-      <Filter>Observers</Filter>
     </ClCompile>
     <ClCompile Include="AIComponent.cpp">
       <Filter>Components</Filter>
@@ -97,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="MenuCommands.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInstance.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,18 +115,6 @@
     <ClInclude Include="PeterPepperObserver.h">
       <Filter>Observers</Filter>
     </ClInclude>
-    <ClInclude Include="LadderPrefab.h">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="LadderComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorPrefab.h">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
@@ -147,9 +123,6 @@
     </ClInclude>
     <ClInclude Include="FoodComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PointObserver.h">
-      <Filter>Observers</Filter>
     </ClInclude>
     <ClInclude Include="AIComponent.h">
       <Filter>Components</Filter>
@@ -165,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="MenuCommands.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInstance.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
