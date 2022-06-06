@@ -10,6 +10,8 @@
 #include <map>
 #include <vector>
 
+#include "InputManager.h"
+
 
 class dae::XboxController::XboxControllerImpl
 {
@@ -37,7 +39,7 @@ public:
 		m_PreviousState = nullptr;
 	}
 
-	std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> ProcessInput() 
+	std::vector<std::pair<ControllerInput, std::shared_ptr<Command>>> ProcessInput()
 	{
 		std::swap(m_PreviousState, m_CurrentState);
 
@@ -46,18 +48,26 @@ public:
 			XInputGetState(i, &m_CurrentState[i]);
 		}
 
-		std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> tempCommand{};
+		std::vector<std::pair<ControllerInput, std::shared_ptr<Command>>> tempCommand{};
 
 		for (auto& b : m_ControllerCommands)
 		{
+			ControllerInput type{};
 			if (IsDown(b.first))
 			{
-				tempCommand.push_back(std::make_pair(b.first.first, (b.second)));
+				type.id = b.first.first;
+				type.pressed = true;
+				tempCommand.push_back(std::make_pair(type, (b.second)));
+			}
+			if(IsUp(b.first))
+			{
+				type.id = b.first.first;
+				type.pressed = false;
+				tempCommand.push_back(std::make_pair(type, (b.second)));
 			}
 		}
 
 		return tempCommand;
-
 	}
 
 	bool IsDown(const std::pair<unsigned, ControllerButton>& controllerButton) const
@@ -98,7 +108,7 @@ public:
 	}
 };
 
-std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> dae::XboxController::ProcessInput() const
+std::vector<std::pair<dae::ControllerInput, std::shared_ptr<Command>>> dae::XboxController::ProcessInput() const
 {
 	return pImpl->ProcessInput();
 }

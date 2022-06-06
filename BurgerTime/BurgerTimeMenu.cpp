@@ -57,6 +57,10 @@ void dae::BurgerTimeMenu::Initialize()
 	std::map<SDL_Scancode, std::shared_ptr<Command>> kInputMap{};
 	kInputMap[SDL_SCANCODE_RETURN] = std::make_shared<StartCommand>(nullptr);
 	InputManager::GetInstance().AddCommand(kInputMap, 0);
+
+	std::map<ControllerButton, std::shared_ptr<Command>> cInputMap{};
+	cInputMap[ControllerButton::Start] = std::make_shared<StartCommand>(nullptr);
+	InputManager::GetInstance().AddCommand(cInputMap, 0);
 }
 
 void dae::BurgerTimeMenu::ReadHighScores()

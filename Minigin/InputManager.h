@@ -7,6 +7,12 @@ class Command;
 
 namespace dae
 {
+	struct ControllerInput
+	{
+		unsigned int id;
+		bool pressed;
+	};
+
 	enum class ControllerButton
 	{
 		DpadUp = 0x0001,
@@ -36,7 +42,6 @@ namespace dae
 		InputManager& operator=(InputManager&& other) noexcept = delete;
 
 		bool ProcessInput();
-		bool IsPressed(ControllerButton button) const;
 
 		void AddCommand(const std::map<ControllerButton, std::shared_ptr<Command>>& inputCommands, unsigned int id);
 		void AddCommand(const std::map<SDL_Scancode, std::shared_ptr<Command>>& inputCommands, unsigned int id);
@@ -44,11 +49,12 @@ namespace dae
 		void ResetCommands();
 	private:
 		XboxController* m_pController;
-		bool GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands) const;
+		bool GetControllerInput(std::vector<std::pair<ControllerInput, std::shared_ptr<Command>>>& commands) const;
 
 		using KeyBoardKey = std::pair<unsigned, SDL_Scancode>;
 		using KeyBoardCommandsMap = std::map<KeyBoardKey, std::shared_ptr<Command>>;
 		KeyBoardCommandsMap m_KeyboardCommands{};
+
 	};
 
 }

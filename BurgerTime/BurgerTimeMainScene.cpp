@@ -92,6 +92,14 @@ void dae::BurgerTimeMainScene::Initialize()
 	kInputMap[SDL_SCANCODE_F] = std::make_shared<PepperCommand>(goPlayer1.get());
 	InputManager::GetInstance().AddCommand(kInputMap, 0);
 
+	//Controller input
+	std::map<ControllerButton, std::shared_ptr<Command>> cInputMap{};
+	cInputMap[ControllerButton::DpadLeft] = std::make_shared<MoveLeftCommand>(goPlayer1.get());
+	cInputMap[ControllerButton::DpadRight] = std::make_shared<MoveRightCommand>(goPlayer1.get());
+	cInputMap[ControllerButton::DpadUp] = std::make_shared<MoveUpLadderCommand>(goPlayer1.get());
+	cInputMap[ControllerButton::DpadDown] = std::make_shared<MoveDownLadderCommand>(goPlayer1.get());
+	cInputMap[ControllerButton::ButtonA] = std::make_shared<PepperCommand>(goPlayer1.get());
+	InputManager::GetInstance().AddCommand(cInputMap, 0);
 
 	ReadJson(m_LevelFile);
 

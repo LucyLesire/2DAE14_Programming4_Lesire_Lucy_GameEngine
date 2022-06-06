@@ -13,11 +13,12 @@ dae::InputManager::~InputManager()
 {
 	delete m_pController;
 	m_pController = nullptr;
+
 }
 
 bool dae::InputManager::ProcessInput()
 {
-	std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> commands{};
+	std::vector<std::pair<ControllerInput, std::shared_ptr<Command>>> commands{};
 
 	//Check keyboard input
 	SDL_Event e;
@@ -58,7 +59,12 @@ bool dae::InputManager::ProcessInput()
 	if (GetControllerInput(commands))
 	{
 		for (const auto& c : commands)
-			c.second->Execute();
+		{
+			if (c.first.pressed)
+				c.second->Execute();
+			else
+				c.second->Release();
+		}
 	}
 
 	return true;
@@ -82,7 +88,7 @@ void dae::InputManager::RemoveCommand(const ControllerButton& button, unsigned i
 	m_pController->RemoveCommand(button, id);
 }
 
-bool dae::InputManager::GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands) const
+bool dae::InputManager::GetControllerInput(std::vector<std::pair<ControllerInput, std::shared_ptr<Command>>>& commands) const
 {
 	commands = m_pController->ProcessInput();
 	if (commands.size() != 0)
