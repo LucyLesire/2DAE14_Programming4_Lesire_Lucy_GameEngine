@@ -8,6 +8,8 @@
 
 void dae::EnemyComponent::Update(float dT)
 {
+
+	//Update animations
 	if (m_AnimState != AnimationState::Dead && GetOwner()->GetComponent<AIComponent>()->GetSquished())
 	{
 		m_AnimState = AnimationState::Dead;

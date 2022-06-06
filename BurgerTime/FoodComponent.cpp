@@ -7,7 +7,7 @@
 
 void FoodComponent::Update(float)
 {
-	for (int i{}; i < m_CurrentTiles.size(); ++i)
+	for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 	{
 		if(m_CurrentTiles[i]->m_IsTriggered)
 		{
@@ -17,7 +17,7 @@ void FoodComponent::Update(float)
 	}
 	if(m_CurrentTiles[0]->m_Pushed)
 	{
-		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			m_Walked[i] = true;
 			m_CurrentTiles[i]->m_Pushed = false;
@@ -48,7 +48,7 @@ void FoodComponent::Fall(float fDt)
 	//Initializing positions
 	auto prevPos = GetOwner()->GetWorldPosition().GetPosition();
 	auto newPosY = prevPos.y + m_FallSpeed * fDt;
-	for (int i{}; i < m_CurrentTiles.size(); ++i)
+	for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 	{
 		m_CurrentTiles[i]->m_Falling = true;
 	}
@@ -58,7 +58,7 @@ void FoodComponent::Fall(float fDt)
 	{
 		m_MaxY = underTile->m_Boundingbox.y;
 		underTile->m_Pushed = true;
-		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			m_CurrentTiles[i]->m_Falling = false;
 		}
@@ -67,7 +67,7 @@ void FoodComponent::Fall(float fDt)
 	//Check if falling in tray
 	if (underTile->m_Type == TileType::Tray)
 	{
-		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			auto newTile = tileManager.GetTileAtIndex(m_CurrentTiles[i]->m_Index + 1);
 			m_CurrentTiles[i]->m_Type = newTile->m_Type;
@@ -87,7 +87,7 @@ void FoodComponent::Fall(float fDt)
 	{
 		GetOwner()->SetPosition(prevPos.x, m_MaxY);
 		m_MaxY = 5000.f;
-		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			auto offset = i * tileManager.GetTileWidth();
 			auto newTile = tileManager.GetTileAtPosition({ GetOwner()->GetWorldPosition().GetPosition().x + offset, GetOwner()->GetWorldPosition().GetPosition().y });
@@ -105,7 +105,7 @@ void FoodComponent::Fall(float fDt)
 		GetOwner()->SetPosition(prevPos.x, newPosY);
 
 		//Update tiles
-		for (int i{}; i < m_CurrentTiles.size(); ++i)
+		for (unsigned int i{}; i < m_CurrentTiles.size(); ++i)
 		{
 			auto offset = i * tileManager.GetTileWidth();
 			auto newTile = tileManager.GetTileAtPosition({ GetOwner()->GetWorldPosition().GetPosition().x + offset, GetOwner()->GetWorldPosition().GetPosition().y });

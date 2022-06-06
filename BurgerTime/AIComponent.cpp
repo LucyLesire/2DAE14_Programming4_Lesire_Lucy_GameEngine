@@ -7,12 +7,12 @@
 #include "PetterPepperComponent.h"
 #include "TileManager.h"
 
-dae::AIComponent::AIComponent(GameObject* pOwner, GameObject* pPlayer, float speed, bool lefty)
+dae::AIComponent::AIComponent(GameObject* pOwner, GameObject* pPlayer, float speed)
 	:BaseComponent(pOwner)
 	,m_pPlayer(pPlayer)
 	,m_Speed(speed)
-	,m_Lefty(lefty)
 {
+	//Init
 	m_SquishedTime = m_MaxSquishedTime;
 	m_StunnedTime = m_MaxStunnedTime;
 }
@@ -31,6 +31,7 @@ void dae::AIComponent::Update(float dt)
 
 void dae::AIComponent::ResetStunned(float dt)
 {
+	//Update stunnedness
 	m_StunnedTime -= dt;
 	if(m_StunnedTime <= 0.f)
 	{
@@ -44,9 +45,11 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 	if (m_Stunned)
 		return;
 
+	//init tiles
 	auto& tileManager = TileManager::GetInstance();
 	auto currentTile = tileManager.GetTileAtPosition(GetOwner()->GetWorldPosition().GetPosition());
 
+	//Check if being squished
 	if (currentTile->m_Falling)
 	{
 		m_Squished = true;
@@ -55,6 +58,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 
 	auto moveComp = GetOwner()->GetComponent<MovementComponent>();
 
+	//Check if being peppered
 	if (currentTile->m_Peppered)
 	{
 		moveComp->MoveRight(false);
@@ -63,6 +67,8 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 		return;
 	}
 
+	//Calculate Movement
+	//x movement > y movement
 	auto fromTilePos = currentTile->m_Boundingbox;
 	auto pos = GetOwner()->GetWorldPosition().GetPosition();
 	auto toTilePos = tileManager.GetTileAtPosition(toPos.GetPosition())->m_Boundingbox;
@@ -83,6 +89,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 
 	if(currentTile->m_Type != TileType::Ladder)
 	{
+		//To right of player
 		if (fromTilePos.x < toTilePos.x)
 		{
 			auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.z + offSet, fromTilePos.y });
@@ -94,6 +101,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 			}
 			else
 			{
+				//Above player
 				if (fromTilePos.y > toTilePos.y)
 				{
 					auto upTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w - offSet });
@@ -103,6 +111,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 						moveComp->MoveUpLadder(true);
 					}
 				}
+				//Below player
 				else
 				{
 					auto downTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w + offSet });
@@ -114,6 +123,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				}
 			}
 		}
+		//Right of player
 		else if (fromTilePos.x > toTilePos.x)
 		{
 			auto leftTile = tileManager.GetTileAtPosition({ pos.x - offSet, fromTilePos.y });
@@ -125,6 +135,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 			}
 			else
 			{
+				//Above player
 				if (fromTilePos.y > toTilePos.y)
 				{
 					auto upTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w - offSet });
@@ -134,6 +145,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 						moveComp->MoveUpLadder(true);
 					}
 				}
+				//Below player
 				else
 				{
 					auto downTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w + offSet });
@@ -145,8 +157,10 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				}
 			}
 		}
+		//Under or above player
 		else
 		{
+			//Above player
 			if (fromTilePos.y > toTilePos.y)
 			{
 				auto upTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.y - offSet + 1.f });
@@ -157,6 +171,8 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				}
 				else
 				{
+					//Check if stuck (player directly above but no ladders)
+					//First get out of stuck -> then back to player
 					m_Stuck = true;
 					auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
 					for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
@@ -167,6 +183,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 
 				}
 			}
+			//Under player
 			else
 			{
 				auto downTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w + offSet });
@@ -177,6 +194,8 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				}
 				else
 				{
+					//Check if stuck (player directly above but no ladders)
+					//First get out of stuck -> then back to player
 					m_Stuck = true;
 					auto rightTile = tileManager.GetTileAtPosition({ fromTilePos.x + offSet, fromTilePos.w });
 					for (int i{}; rightTile->m_Type != TileType::Empty; ++i)
@@ -188,8 +207,10 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 			}
 		}
 	}
+	//On ladder
 	else
 	{
+		//Move up
 		if (fromTilePos.y > toTilePos.y)
 		{
 			auto upTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w - offSet });
@@ -199,6 +220,7 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 				moveComp->MoveUpLadder(true);
 			}
 		}
+		//Move down
 		else
 		{
 			auto downTile = tileManager.GetTileAtPosition({ fromTilePos.x, fromTilePos.w + offSet });
@@ -213,11 +235,13 @@ void dae::AIComponent::CalculatePath(const Transform& toPos)
 
 void dae::AIComponent::Squished(float dt)
 {
+	//Reset movement
 	auto moveComp = GetOwner()->GetComponent<MovementComponent>();
 
 	moveComp->MoveLeft(false);
 	moveComp->MoveDownLadder(false);
 
+	//Destory
 	m_SquishedTime -= dt;
 	if(m_SquishedTime <= 0)
 	{

@@ -18,9 +18,6 @@
     <Filter Include="Observers">
       <UniqueIdentifier>{91bc370a-0085-4b20-8239-0e0b9262deee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Prefabs">
-      <UniqueIdentifier>{9a25377e-8f47-48a4-a340-b934af3178ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tile">
       <UniqueIdentifier>{c3de832d-1021-46b2-b3e9-7fc26665d3a8}</UniqueIdentifier>
     </Filter>
@@ -53,14 +50,8 @@
     <ClCompile Include="BurgerTimeGame.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="BurgerTimePCH.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="PeterPepperObserver.cpp">
       <Filter>Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="Prefab.cpp">
-      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="TileManager.cpp">
       <Filter>Tile</Filter>
@@ -109,14 +100,8 @@
     <ClInclude Include="BurgerTimeGame.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="BurgerTimePCH.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="PeterPepperObserver.h">
       <Filter>Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Prefab.h">
-      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="TileManager.h">
       <Filter>Tile</Filter>

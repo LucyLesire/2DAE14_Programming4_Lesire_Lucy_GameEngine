@@ -27,7 +27,7 @@ namespace dae
 		void LateUpdate(float) override {};
 
 		PetterPepperComponent(GameObject* pOwner);
-		virtual ~PetterPepperComponent() = default;
+		~PetterPepperComponent() override = default;
 		PetterPepperComponent(const PetterPepperComponent& other) = delete;
 		PetterPepperComponent(PetterPepperComponent&& other) = delete;
 		PetterPepperComponent& operator=(const PetterPepperComponent& other) = delete;
@@ -36,7 +36,6 @@ namespace dae
 		void Die();
 		void AddPoints(int amount);
 		void Pepper();
-		void PlaySound();
 		int GetLives() const { return m_Lives; };
 		int GetPoints() const { return m_Points; };
 

@@ -5,7 +5,7 @@ namespace dae
 	{
 	public:
 		BaseGame(uint32_t windowWidth = 800, uint32_t windowHeight = 1240);
-		~BaseGame() = default;
+		virtual ~BaseGame() = default;
 		BaseGame(const BaseGame& other) = delete;
 		BaseGame(BaseGame&& other) noexcept = delete;
 		BaseGame& operator=(const BaseGame& other) = delete;

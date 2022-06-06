@@ -10,11 +10,11 @@ namespace dae
 	class GameObject final
 	{
 	public:
-		void Initialize();
-		void Update(float deltaTime);
-		void Render();
-		void FixedUpdate(float fixedDT);
-		void LateUpdate(float deltaTime);
+		void Initialize() const;
+		void Update(float deltaTime) const;
+		void Render() const;
+		void FixedUpdate(float fixedDT) const;
+		void LateUpdate(float deltaTime) const;
 
 		void SetPosition(float x, float y);
 		Transform GetWorldPosition();

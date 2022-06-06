@@ -8,7 +8,7 @@ namespace dae
 	{
 	public:
 		BurgerTimeGame(uint32_t windowWidth = 748, uint32_t windowHeight = 720);
-		~BurgerTimeGame() = default;
+		~BurgerTimeGame() override = default;
 		BurgerTimeGame(const BurgerTimeGame& other) = delete;
 		BurgerTimeGame(BurgerTimeGame&& other) noexcept = delete;
 		BurgerTimeGame& operator=(const BurgerTimeGame& other) = delete;

@@ -15,7 +15,7 @@ namespace dae
 
 		explicit ImageComponent(const std::string& fileName);
 		ImageComponent() = default;
-		virtual ~ImageComponent() = default;
+		~ImageComponent() override = default;
 		ImageComponent(const ImageComponent& other) = delete;
 		ImageComponent(ImageComponent&& other) = delete;
 		ImageComponent& operator=(const ImageComponent& other) = delete;

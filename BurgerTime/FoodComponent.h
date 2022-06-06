@@ -8,7 +8,7 @@ class FoodComponent : public dae::BaseComponent
 {
 public:
 	explicit FoodComponent(dae::GameObject* pOwner, dae::GameObject* pPlayer, float fallSpeed = 50.f);
-	~FoodComponent() = default;
+	~FoodComponent() override = default;
 	FoodComponent(const FoodComponent& other) = delete;
 	FoodComponent(FoodComponent&& other) noexcept = delete;
 	FoodComponent& operator=(const FoodComponent& other) = delete;

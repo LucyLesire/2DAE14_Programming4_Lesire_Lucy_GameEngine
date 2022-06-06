@@ -15,7 +15,7 @@ namespace dae
 
 		explicit FPSComponent(GameObject* pOwner);
 		FPSComponent() = default;
-		virtual ~FPSComponent() = default;
+		~FPSComponent() override = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;
 		FPSComponent& operator=(const FPSComponent& other) = delete;

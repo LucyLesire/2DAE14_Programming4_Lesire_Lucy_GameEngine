@@ -16,7 +16,7 @@ namespace dae
 		void LateUpdate(float) override {};
 
 		EnemyComponent(GameObject* pOwner, int score, GameObject* pPlayer);
-		virtual ~EnemyComponent() = default;
+		~EnemyComponent() override = default;
 		EnemyComponent(const EnemyComponent& other) = delete;
 		EnemyComponent(EnemyComponent&& other) = delete;
 		EnemyComponent& operator=(const EnemyComponent& other) = delete;

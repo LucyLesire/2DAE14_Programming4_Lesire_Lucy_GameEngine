@@ -64,16 +64,16 @@ public:
 
 	void InitializeTiles(const std::vector<Tile*>& tiles, int rows, int cols, int windowHeight, int windowWidth);
 
-	Tile* GetTileAtPosition(const glm::vec2& pos) { return m_Tiles[PositionToIndex(pos)]; }
-	Tile* GetTileAtIndex(int index) { return m_Tiles[index]; }
+	Tile* GetTileAtPosition(const glm::vec2& pos) const { return m_Tiles[PositionToIndex(pos)]; }
+	Tile* GetTileAtIndex(int index) const { return m_Tiles[index]; }
 
 	int PositionToIndex(const glm::vec2& pos) const;
-	glm::vec2 IndexToPosition(int index) const;
+	glm::vec2 IndexToPosition(unsigned int index) const;
 
-	void SetTileType(TileType type, int index);
-	void SetExtraTileType(ExtraType type, int index);
+	void SetTileType(TileType type, int index) const;
+	void SetExtraTileType(ExtraType type, int index) const;
 
-	Tile* GetTileUnder(int index) { return m_Tiles[index + 1]; };
+	Tile* GetTileUnder(int index) const { return m_Tiles[index + 1]; };
 
 	float GetTileWidth() const { return m_TileWidth; }
 	void SetTileWidth(float w) { m_TileWidth = w; }

@@ -42,7 +42,6 @@ void dae::BurgerTimeMainScene::Initialize()
 	GameInstance::GetInstance().Reset();
 	GameInstance::GetInstance().Init(4);
 
-
 	//Level
 	std::shared_ptr<GameObject> goLevel = std::make_shared<GameObject>("Level", -1);
 	std::string levelImg{ m_LevelFile };
@@ -81,7 +80,7 @@ void dae::BurgerTimeMainScene::Initialize()
 	Add(goPlayer1);
 
 	//Collision
-	const auto& collideObserver = std::make_shared<LadderObserver>(goPlayer1.get());
+	const auto& collideObserver = std::make_shared<CollisionObserver>(goPlayer1.get());
 	goPlayer1->GetComponent<CollisionComponent>()->GetSubject()->AddObserver(collideObserver);
 
 	//Input
@@ -116,6 +115,15 @@ void dae::BurgerTimeMainScene::Initialize()
 	goPoints->SetPosition(GetWidth()/2.f, 0);
 	Add(goPoints);
 	goPlayer1->GetComponent<PetterPepperComponent>()->GetSubject()->AddObserver(std::make_shared<PointDisplay>(goPoints->GetComponent<TextComponent>()));
+
+	auto goLives = std::make_shared<GameObject>("Live Display", 1);
+	auto livesImgComp = goLives->AddComponent(std::make_shared<ImageComponent>("Lives.png"));
+	goLives->SetPosition(GetWidth() / 3.f, 0);
+	livesImgComp->SetSheetSize({ 24.f, 8.f });
+	livesImgComp->SetSize({ 36.f * 3.f , 36.f});
+	Add(goLives);
+	goPlayer1->GetComponent<PetterPepperComponent>()->GetSubject()->AddObserver(std::make_shared<HealthDisplay>(goLives->GetComponent<ImageComponent>()));
+
 }
 
 void dae::BurgerTimeMainScene::Update(float dT)
@@ -195,6 +203,7 @@ void dae::BurgerTimeMainScene::ReadJson(const std::string& fileLoc)
 
 				tileManager.InitializeTiles(tiles, m_Rows, cols, 748, 720);
 				tileManager.SetTileWidth(width * scale);
+
 			}
 
 			if (objectString == ladderTag.c_str())

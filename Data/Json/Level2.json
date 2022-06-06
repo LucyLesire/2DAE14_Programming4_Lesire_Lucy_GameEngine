@@ -97,13 +97,19 @@
   {
     "object": "Enemy",
     "gridPositions": [
-      [ 1, 1, 1, 1, "HotDog", true ]
+      [ 1, 1, 1, 1, "HotDog", true ],
+      [ 15, 15, 1, 1, "HotDog", true ],
+      [ 8, 8, 7, 7, "HotDog", true ],
+      [ 14, 14, 15, 15, "HotDog", true ],
+      [ 22, 22, 1, 1, "Egg", false ],
+      [ 2, 2, 9, 9, "Egg", false ],
+      [ 16, 16, 11, 11, "Pickle", false ]
     ]
   },
   {
     "object": "Player",
     "gridPositions": [
-      [ 12, 12, 17, 17 ]
+      [ 12, 12, 8, 8 ]
     ]
   }
 

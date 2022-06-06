@@ -85,6 +85,8 @@
     "object": "Enemy",
     "gridPositions": [
       [1, 1, 19, 19, "HotDog", true],
+      [1, 1, 5, 5, "HotDog", true],
+      [12, 12, 1, 1, "HotDog", true],
       [15, 15, 19, 19, "Egg", false],
       [22, 22, 9, 9, "Pickle", false]
     ]

@@ -19,7 +19,7 @@ namespace dae
 		void AddObserver(std::shared_ptr<Observer> pObserver);
 		void RemoveObserver(std::shared_ptr<Observer> pObserver);
 
-		void Notify(GameObject* pGo, Event event);
+		void Notify(GameObject* pGo, Event event) const;
 		~Subject() = default;
 
 	private:

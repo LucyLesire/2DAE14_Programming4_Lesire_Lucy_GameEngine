@@ -6,10 +6,10 @@
 #include "Observer.h"
 #include "SceneManager.h"
 
-class LadderObserver : public dae::Observer
+class CollisionObserver : public dae::Observer
 {
 public:
-	virtual ~LadderObserver() = default;
+	~CollisionObserver() override = default;
 	void OnNotify(dae::GameObject* pGo, dae::Event event) override
 	{
 		switch (event)
@@ -26,15 +26,15 @@ public:
 		}
 	}
 
-	explicit LadderObserver(dae::GameObject* pPlayer)
+	explicit CollisionObserver(dae::GameObject* pPlayer)
 	{
 		m_pPlayer = pPlayer;
 	}
-	LadderObserver() = default;
-	LadderObserver(const LadderObserver& other) = delete;
-	LadderObserver(LadderObserver&& other) noexcept = delete;
-	LadderObserver& operator=(const LadderObserver& other) = delete;
-	LadderObserver& operator=(LadderObserver&& other) noexcept = delete;
+	CollisionObserver() = default;
+	CollisionObserver(const CollisionObserver& other) = delete;
+	CollisionObserver(CollisionObserver&& other) noexcept = delete;
+	CollisionObserver& operator=(const CollisionObserver& other) = delete;
+	CollisionObserver& operator=(CollisionObserver&& other) noexcept = delete;
 
 private:
 	dae::GameObject* m_pPlayer{};
@@ -43,7 +43,7 @@ private:
 class PetterPepperObserver : public dae::Observer
 {
 public:
-	virtual ~PetterPepperObserver() = default;
+	~PetterPepperObserver() override = default;
 	void OnNotify(dae::GameObject * /*pGo*/, dae::Event event) override
 	{
 		switch (event)
@@ -51,6 +51,11 @@ public:
 		case dae::Event::Restart:
 		{
 			dae::SceneManager::GetInstance().RestartScene();
+		}
+		break;
+		case dae::Event::NoLives:
+		{
+			dae::SceneManager::GetInstance().SetActiveScene(dae::SceneManager::GetInstance().GetSceneAtIndex(0));
 		}
 		break;
 		}

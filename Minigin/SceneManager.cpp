@@ -56,6 +56,7 @@ void dae::SceneManager::LateUpdate(float dT)
 
 void dae::SceneManager::SetActiveScene(std::shared_ptr<Scene> scene)
 {
+	//Set scene to update at end of current gameloop
 	if (!m_ActiveScene)
 	{
 		m_ActiveScene = scene;
@@ -71,6 +72,7 @@ void dae::SceneManager::SetActiveScene(std::shared_ptr<Scene> scene)
 
 void dae::SceneManager::SetSceneAtEndGameLoop()
 {
+	//Change scenes
 	if(m_SceneChange)
 	{
 		if (m_ActiveScene)

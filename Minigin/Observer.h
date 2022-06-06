@@ -14,7 +14,8 @@ namespace dae
 		BurgerDropped,
 		EnemyKilled,
 		Collide,
-		Restart
+		Restart,
+		NoLives
 	};
 
 	class Observer

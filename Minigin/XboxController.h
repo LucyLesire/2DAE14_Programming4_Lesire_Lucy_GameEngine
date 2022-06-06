@@ -16,7 +16,7 @@ namespace dae
 		XboxControllerImpl* pImpl;
 	public:
 
-		std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> ProcessInput();
+		std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> ProcessInput() const;
 		bool IsPressed(const std::pair<unsigned, ControllerButton>& controllerButton) const;
 		bool IsDown(const std::pair<unsigned, ControllerButton>& controllerButton) const;
 		bool IsUp(const std::pair<unsigned, ControllerButton>& controllerButton) const;

@@ -44,7 +44,7 @@ namespace dae
 		void ResetCommands();
 	private:
 		XboxController* m_pController;
-		bool GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands);
+		bool GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands) const;
 
 		using KeyBoardKey = std::pair<unsigned, SDL_Scancode>;
 		using KeyBoardCommandsMap = std::map<KeyBoardKey, std::shared_ptr<Command>>;

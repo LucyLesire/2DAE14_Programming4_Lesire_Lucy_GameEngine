@@ -12,7 +12,7 @@ namespace  dae
 	{
 	public:
 		BurgerTimeMainScene(const std::string& name, uint32_t width, uint32_t height, unsigned int id, const std::string& levelFile);
-		~BurgerTimeMainScene() = default;
+		~BurgerTimeMainScene() override = default;
 		BurgerTimeMainScene(const BurgerTimeMainScene& other) = delete;
 		BurgerTimeMainScene(BurgerTimeMainScene&& other) noexcept = delete;
 		BurgerTimeMainScene& operator=(const BurgerTimeMainScene& other) = delete;

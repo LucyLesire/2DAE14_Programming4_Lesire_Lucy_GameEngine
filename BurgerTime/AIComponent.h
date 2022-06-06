@@ -8,8 +8,8 @@ namespace dae
 	class AIComponent : public dae::BaseComponent
 	{
 	public:
-		AIComponent(GameObject* pOwner, GameObject* pPlayer, float speed = 100.f, bool lefty = false);
-		~AIComponent() = default;
+		AIComponent(GameObject* pOwner, GameObject* pPlayer, float speed = 100.f);
+		~AIComponent() override = default;
 		AIComponent(const AIComponent& other) = delete;
 		AIComponent(AIComponent&& other) noexcept = delete;
 		AIComponent& operator=(const AIComponent& other) = delete;
@@ -36,7 +36,6 @@ namespace dae
 		Transform m_GetOutOfStuck{};
 
 		bool m_Squished{};
-		bool m_Lefty{ false };
 
 		float m_SquishedTime{};
 		float m_MaxSquishedTime{ 1.f };

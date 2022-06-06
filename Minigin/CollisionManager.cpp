@@ -22,7 +22,8 @@ void dae::CollisionManager::Update(float)
 				if (colliding)
 				{
 					dae::GameObject* pCollidingObject = pOtherCollider->GetOwner();
-					pCollider->GetSubject()->Notify(pCollidingObject, dae::Event::Collide);
+					if(pCollidingObject)
+						pCollider->GetSubject()->Notify(pCollidingObject, dae::Event::Collide);
 				}
 			}
 		}

@@ -21,7 +21,7 @@ void dae::Subject::RemoveObserver(std::shared_ptr<Observer> pObserver)
 	m_pObservers.erase(removeIt);
 }
 
-void dae::Subject::Notify(GameObject* pGo, Event event)
+void dae::Subject::Notify(GameObject* pGo, Event event) const
 {
 	for(const auto& o: m_pObservers)
 	{

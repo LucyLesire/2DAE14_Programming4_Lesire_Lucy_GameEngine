@@ -19,6 +19,7 @@ bool dae::InputManager::ProcessInput()
 {
 	std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> commands{};
 
+	//Check keyboard input
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
@@ -53,6 +54,7 @@ bool dae::InputManager::ProcessInput()
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
 
+	//Check controller input
 	if (GetControllerInput(commands))
 	{
 		for (const auto& c : commands)
@@ -80,7 +82,7 @@ void dae::InputManager::RemoveCommand(const ControllerButton& button, unsigned i
 	m_pController->RemoveCommand(button, id);
 }
 
-bool dae::InputManager::GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands)
+bool dae::InputManager::GetControllerInput(std::vector<std::pair<unsigned int, std::shared_ptr<Command>>>& commands) const
 {
 	commands = m_pController->ProcessInput();
 	if (commands.size() != 0)

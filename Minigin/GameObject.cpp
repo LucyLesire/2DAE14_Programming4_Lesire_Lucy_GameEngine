@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "RenderComponent.h"
 
-void dae::GameObject::Initialize()
+void dae::GameObject::Initialize() const
 {
 	for (auto c : m_pComponents)
 	{
@@ -10,7 +10,7 @@ void dae::GameObject::Initialize()
 	}
 }
 
-void dae::GameObject::Update(float deltaTime)
+void dae::GameObject::Update(float deltaTime) const
 {
 	for (auto c : m_pComponents)
 	{
@@ -18,13 +18,13 @@ void dae::GameObject::Update(float deltaTime)
 	}
 }
 
-void dae::GameObject::Render()
+void dae::GameObject::Render() const
 {
 	if(GetComponent<RenderComponent>() != nullptr)
 		GetComponent<RenderComponent>()->Render();
 }
 
-void dae::GameObject::FixedUpdate(float fixedDT)
+void dae::GameObject::FixedUpdate(float fixedDT) const
 {
 	for (auto c : m_pComponents)
 	{
@@ -32,7 +32,7 @@ void dae::GameObject::FixedUpdate(float fixedDT)
 	}
 }
 
-void dae::GameObject::LateUpdate(float deltaTime)
+void dae::GameObject::LateUpdate(float deltaTime) const
 {
 	for (auto c : m_pComponents)
 	{
@@ -104,18 +104,6 @@ dae::GameObject::GameObject(const std::string& tag, int renderOrder)
 
 dae::GameObject::~GameObject()
 {
-	//if(m_pParent)
-	//{
-	//	delete m_pParent;
-	//	m_pParent = nullptr;
-	//}
-
-	//for(int i{}; i < m_pChildren.size(); ++i)
-	//{
-	//	delete m_pChildren[i];
-	//	m_pChildren[i] = nullptr;
-	//}
-
 	m_pChildren.clear();
 }
 

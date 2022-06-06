@@ -65,9 +65,11 @@ namespace dae
 				auto sound = Mix_LoadWAV(m_pActiveClips.front().second.c_str());
 				if (!sound)
 					return;
+				if (Mix_Playing(-1))
+					return;
 
 				sound->volume = static_cast<Uint8>(m_pActiveClips.front().first * 100);
-				Mix_PlayChannel(-1, sound, 0);
+				Mix_PlayChannel(-1, sound, -1);
 				m_pActiveClips.pop();
 				std::this_thread::sleep_for(0.1s);
 			}

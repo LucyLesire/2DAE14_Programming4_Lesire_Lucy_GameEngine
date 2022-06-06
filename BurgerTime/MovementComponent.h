@@ -23,19 +23,11 @@ namespace dae
 		void LateUpdate(float dT) override;
 
 		MovementComponent(GameObject* pOwner, float speed);
-		virtual ~MovementComponent() = default;
+		~MovementComponent() override = default;
 		MovementComponent(const MovementComponent& other) = delete;
 		MovementComponent(MovementComponent&& other) = delete;
 		MovementComponent& operator=(const MovementComponent& other) = delete;
 		MovementComponent& operator=(MovementComponent&& other) = delete;
-
-
-		void Move(glm::vec2 dir, bool enable);
-
-		void SetOnLadder(bool enable, glm::vec2 maxY = glm::vec2{ 0.f, 1000.f }) { m_OnLadder = enable; m_MaxY = maxY; }
-		void SetOnFloor(bool enable, glm::vec4 currentFloorDimension = glm::vec4{ 0.f, 1000.f, 0.f, 1000.f }) { m_OnFloor = enable; m_FloorDim = currentFloorDimension; }
-
-		bool GetOnLadder() const { return m_OnLadder; }
 
 		void MoveLeft(bool enable);
 		void MoveRight(bool enable);
@@ -53,10 +45,6 @@ namespace dae
 
 		float m_Speed{};
 		Transform m_MoveDir{};
-		Transform m_Acceleration{};
-		bool m_OnLadder{};
-		bool m_OnFloor{};
-		bool m_UsingLadder{};
 
 		Tile* m_CurrentTile{};
 

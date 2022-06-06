@@ -3,6 +3,7 @@
 #include <SDL_rect.h>
 
 #include "Command.h"
+#include "GameInstance.h"
 #include "ImageComponent.h"
 #include "MovementComponent.h"
 #include "Observer.h"
@@ -10,16 +11,18 @@
 
 void dae::PetterPepperComponent::Update(float dt)
 {
+	//Check if dead
 	if(m_Dead)
 	{
 		m_DeadTime -= dt;
 		if(m_DeadTime <= 0.f)
 		{
+			//Restart level
 			GetSubject()->Notify(GetOwner(), Event::Restart);
 		}
 	}
 
-
+	//Check reset peppering
 	if(m_PepperedTile)
 	{
 		if(m_PepperedTile->m_Peppered)
@@ -43,6 +46,7 @@ void dae::PetterPepperComponent::Update(float dt)
 		}
 	}
 
+	//Update animations
 	if(auto moveComp = GetOwner()->GetComponent<MovementComponent>())
 	{
 		if(m_AnimState != AnimationState::Dead)
@@ -84,23 +88,38 @@ void dae::PetterPepperComponent::FixedUpdate(float)
 dae::PetterPepperComponent::PetterPepperComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
+	//Init
 	SetWorldTransform(pOwner->GetWorldPosition());
 	m_LastSpriteUpdate = m_MaxSpriteUpdate;
 	m_PepperTime = m_MaxPepperTime;
+	m_Points = GameInstance::GetInstance().GetScore();
 }
 
 void dae::PetterPepperComponent::Die()
 {
 	if(!m_Dead)
 	{
-		m_Lives--;
+		//Store data in GameInstance
+		GameInstance::GetInstance().LostLife();
+		GameInstance::GetInstance().SetScore(GetPoints());
+
+		//Update livesDisplay
 		GetSubject()->Notify(GetOwner(), Event::Died);
 
+		//Update animation
 		m_AnimState = AnimationState::Dead;
 		m_AnimStateDirty = true;
 		GetOwner()->GetComponent<MovementComponent>()->Died();
 		m_Dead = true;
+
+		//Restart
+		if (GameInstance::GetInstance().GetLives() <= 0)
+		{
+			GetSubject()->Notify(GetOwner(), dae::Event::NoLives);
+		}
 	}
+
+
 }
 
 void dae::PetterPepperComponent::AddPoints(int amount)
@@ -110,6 +129,7 @@ void dae::PetterPepperComponent::AddPoints(int amount)
 
 void dae::PetterPepperComponent::Pepper()
 {
+	//Check pepper direction
 	auto& tileManager = TileManager::GetInstance();
 	auto playerDir = GetOwner()->GetComponent<MovementComponent>()->GetMoveDir().GetPosition().x;
 	if (playerDir <= 0.01f && playerDir >= -0.01f)
@@ -118,10 +138,12 @@ void dae::PetterPepperComponent::Pepper()
 	}
 	auto offset = tileManager.GetTileWidth() * playerDir;
 
+	//Pepper adjecent tile
 	auto nextTile = tileManager.GetTileAtPosition({ GetOwner()->GetWorldPosition().GetPosition().x + offset, GetOwner()->GetWorldPosition().GetPosition().y });
 	nextTile->m_Peppered = true;
 	m_PepperedTile = nextTile;
 
+	//Update image component of pepper
 	size_t childAmount = GetOwner()->GetChildCount();
 	for(size_t i{}; i < childAmount; ++i)
 	{

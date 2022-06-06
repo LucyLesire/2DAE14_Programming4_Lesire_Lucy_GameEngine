@@ -37,7 +37,7 @@ public:
 		m_PreviousState = nullptr;
 	}
 
-	std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> ProcessInput()
+	std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> ProcessInput() 
 	{
 		std::swap(m_PreviousState, m_CurrentState);
 
@@ -98,7 +98,7 @@ public:
 	}
 };
 
-std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> dae::XboxController::ProcessInput()
+std::vector<std::pair<unsigned int, std::shared_ptr<Command>>> dae::XboxController::ProcessInput() const
 {
 	return pImpl->ProcessInput();
 }

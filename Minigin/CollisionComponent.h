@@ -22,7 +22,7 @@ namespace dae
 	{
 	public:
 		CollisionComponent(GameObject* pOwner, bool active, float width, float height, bool centered = true);
-		~CollisionComponent() = default;
+		~CollisionComponent() override = default;
 		CollisionComponent(const CollisionComponent& other) = delete;
 		CollisionComponent(CollisionComponent&& other) noexcept = delete;
 		CollisionComponent& operator=(const CollisionComponent& other) = delete;
@@ -33,12 +33,12 @@ namespace dae
 		void Update(float dT) override;
 		void LateUpdate(float) override{};
 
-		const Box2D GetCollisionBox2D() const { return m_ColBox2D; }
+		Box2D GetCollisionBox2D() const { return m_ColBox2D; }
 
 		bool CollideCheck(CollisionComponent* pCollider) const;
 
 		bool IsActive() const { return m_Active; }
-		void SetAtive(bool active) { m_Active = active; }
+		void SetActive(bool active) { m_Active = active; }
 
 		bool IsColliding() const { return m_Colliding; }
 		void SetColliding(bool enable) { m_Colliding = enable; }

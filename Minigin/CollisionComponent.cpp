@@ -15,7 +15,7 @@ dae::CollisionComponent::CollisionComponent(GameObject* pOwner, bool active, flo
 
 void dae::CollisionComponent::Initialize()
 {
-	//Set location of collision box, taking into account the parent object's transform
+	//Update positions
 	const auto& parentPos = GetOwner()->GetWorldPosition().GetPosition();
 	const auto& compPos = GetLocalTransform().GetPosition();
 	if(m_Centered)
@@ -32,6 +32,7 @@ void dae::CollisionComponent::Initialize()
 
 void dae::CollisionComponent::Update(float)
 {
+	//Update positions
 	const auto& parentPos = GetOwner()->GetWorldPosition().GetPosition();
 	const auto& compPos = GetLocalTransform().GetPosition();
 	if (m_Centered)
@@ -46,9 +47,11 @@ void dae::CollisionComponent::Update(float)
 
 bool dae::CollisionComponent::CollideCheck(CollisionComponent* pCollider) const
 {
+	//Check if active
 	if (!pCollider->IsActive() || !IsActive())
 		return false;
 
+	//Get bottoms
 	const auto& bottomLeft = m_ColBox2D.m_BottomLeft.GetPosition();
 	const auto& size = m_ColBox2D.m_Size.GetPosition();
 
@@ -56,6 +59,7 @@ bool dae::CollisionComponent::CollideCheck(CollisionComponent* pCollider) const
 	const auto& otherBottomLeft = otherColBox.m_BottomLeft.GetPosition();
 	const auto& otherSize = otherColBox.m_Size.GetPosition();
 
+	//Colliding
 	if(bottomLeft.x <= otherBottomLeft.x + otherSize.x && bottomLeft.x + size.x >= otherBottomLeft.x)
 	{
 		if(bottomLeft.y <= otherBottomLeft.y + otherSize.y && bottomLeft.y + size.y >= otherBottomLeft.y)
